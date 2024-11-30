@@ -1,70 +1,54 @@
-# Getting Started with Create React App
+# Financial Overview
+# Summary
+This project is a financial overview application that allows users to track their income and expenses. The application consists of several components that display the financial data in different ways. The main components are the calendar component, the overview component, the list component, and the financial flow component. The calendar component displays the current month and year and allows users to add, edit, and delete events. The overview component displays the total income and expenses for the current year/month/week/day and a pie chart that shows the percentage of income and expenses for the current month. The list component displays all the income and expenses for the current year/month/week/day. The financial flow component displays the percentage of capital flow from all income to all expenses for the current year/month/week/day. Each category is represented by a different color, and the categories are sorted by the amount of money spent on them. The categories are clickable to display the events that belong to them and are highlighted when hovered over.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Below is a list of the features that need to be implemented for each component.
 
-## Available Scripts
+Start Date: 2024-30-12
 
-In the project directory, you can run:
+## Calendar Component
 
-### `npm start`
+- [x] Create a calendar component that displays the current month and year. (2024-30-12)
+- [ ] Display the number of the week in the year.
+- 
+- [ ] Add a button to navigate to the next month.
+- [ ] Add a button to navigate to the previous month.
+- [ ] Add a button to navigate to the month of the current day.
+- [ ] Add a button to navigate to the next year.
+- [ ] Add a button to navigate to the previous year.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- [ ] Left click on a day to add an expense / income.
+- [ ] Open a modal when a day is clicked.
+- [ ] Add a button to close the modal.
+- [ ] Add a form to add a new event to the calendar.
+- [ ] Add a button to delete an event from the calendar.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Overview Component
+- [ ] Create an overview component that displays the total income and expenses for the current year/month/week/day.
+- [ ] Create a pie chart that displays the percentage of income and expenses for the current month.
+- [ ] Add a button to navigate to the next month.
+- [ ] Add a button to navigate to the previous month.
+- [ ] Add a button to navigate to the month of the current day.
+- [ ] Add a button to navigate to the next year.
+- [ ] Add a button to navigate to the previous year.
 
-### `npm test`
+- [ ] Options menu to select the time frame (year/month/week/day).
+- [ ] Options menu to select the type of event (income/expense).
+- [ ] Options menu to select the category of the event (food/transportation/entertainment/etc).
+- [ ] Options menu to select the type of chart (pie chart/bar chart/line chart).
+  
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## List Component
+### Alternative view to the calendar component (optional)
+- [ ] Create a list component that displays all the income and expenses for the current year/month/week/day.
+- [ ] Add a button to navigate to the next month.
+- [ ] Add a button to navigate to the previous month.
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Financial Flow Component
+- [ ] Create a financial flow component that displays the peercentual capiital flow from all income to all expanses for the current year/month/week/day.
+- [ ] Each category should be represented by a different color.
+- [ ] The categories should be sorted by the amount of money spent on them.
+- [ ] The categories should be clickable to display the events that belong to them.
+- [ ] The categories should be highlighted when hovered over.
+   
