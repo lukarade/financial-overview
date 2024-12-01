@@ -3,6 +3,45 @@ import Calendar from "../../components/Calender.tsx";
 
 // TODO: Clean up the styles when the layout is finalized
 
+const exampleData = {
+    "expenses": {
+        "id1": {
+            "name": "Rent",
+            "amount": 1000,
+            "date": "2024-01-12",
+        },
+        "id2": {
+            "name": "Food",
+            "amount": 100,
+            "date": "2024-01-15",
+        },
+        "id3": {
+            "name": "Internet",
+            "amount": 50,
+            "date": "2024-01-20",
+        },
+        "id4": {
+            "name": "Electricity",
+            "amount": 50,
+            "date": "2024-01-20",
+        },
+    },
+    "income": {
+        "id1": {
+            "name": "Salary",
+            "amount": 2000,
+            "date": "2024-01-01",
+        },
+        "id2": {
+            "name": "Bonus",
+            "amount": 500,
+            "date": "2024-01-15",
+        },
+    },
+};
+
+
+
 const headerStyle: CSSProperties = {
     outline: "3px solid black",
 };
@@ -66,7 +105,7 @@ function OverviewView() {
             {/* <h2>OverviewView</h2> */}
             <div style={{ ...calendarStyle, ...overviewComponentStyle }}>
                 <h3>Calendar</h3>
-                <Calendar />
+                <Calendar data={exampleData} />
             </div>
             <div style={{ ...overviewStyle, ...overviewComponentStyle }}>
                 <h3>Overview</h3>

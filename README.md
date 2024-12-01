@@ -4,12 +4,12 @@ This project is a financial overview application that allows users to track thei
 
 Below is a list of the features that need to be implemented for each component.
 
-Start Date: 2024-30-12
+Start Date: 2024-30-11
 
 ## Calendar Component
 
-- [x] Create a calendar component that displays the current month and year. (2024-30-12)
-- [ ] Display the number of the week in the year.
+- [x] Create a calendar component that displays the current month and year. (2024-30-11)
+- [x] Display the number of the week in the year. (2024-01-12)
 - 
 - [ ] Add a button to navigate to the next month.
 - [ ] Add a button to navigate to the previous month.
