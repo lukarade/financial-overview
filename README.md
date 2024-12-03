@@ -10,6 +10,7 @@ Start Date: 2024-30-11
 
 - [x] Create a calendar component that displays the current month and year. (2024-30-11)
 - [x] Display the number of the week in the year. (2024-01-12)
+- [ ] Display the total income and expenses for the current month.
 - 
 - [ ] Add a button to navigate to the next month.
 - [ ] Add a button to navigate to the previous month.
@@ -46,8 +47,11 @@ Start Date: 2024-30-11
   - [ ] Amount
   - [ ] Category
   - [ ] Type
+- [x] Display the total income and expenses for the current year/month/week/day. (2024-03-12)
 - [ ] Add a button to navigate to the next month.
 - [ ] Add a button to navigate to the previous month.
+#### Bugs
+- [ ] Fix the bug that causes the list to generate month/ week/ day components for total income and expenses (which of course are not events). These are not displayed by a workaround with a guard clause in the coresponding component.
 
 
 ## Financial Flow Component

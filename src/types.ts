@@ -27,16 +27,34 @@ interface Expense extends Transaction {
 
 interface Income extends Transaction {
 }
+interface DayTransactions {
+    transactions: (Expense | Income)[];
+    totalExpense: number;
+    totalIncome: number;
+}
+
+interface WeekTransactions {
+    day: DayTransactions;
+    totalExpense: number;
+    totalIncome: number;
+}
+
+interface MonthTransactions {
+    week: WeekTransactions;
+    totalExpense: number;
+    totalIncome: number;
+}
+
+interface YearTransactions {
+    month: MonthTransactions;
+    totalExpense: number;
+    totalIncome: number;
+}
 
 interface GroupedTransactions {
-    [year: string]: {
-        [month: string]: {
-            [week: string]: {
-                [day: string]: (Expense | Income)[];
-            };
-        };
-    };
+    year: YearTransactions;
 }
 
 
-export { CalendarDay, FinancialData, Expense, Income, GroupedTransactions };
+
+export { CalendarDay, FinancialData, Expense, Income, GroupedTransactions, DayTransactions, WeekTransactions, MonthTransactions, YearTransactions };
