@@ -13,14 +13,14 @@ function List({ data }: { data: FinancialData }): JSX.Element {
                 return Object.entries(groupedData)
                     .sort((a, b) => parseInt(a[0]) - parseInt(b[0]))
                     .map(([year, months]) => (
-                        <Year key={year} year={year} months={months} />
+                        <Year key={year} year={year} months={months} sortOption={sortOption} />
                     ));
             case "month":
                 return Object.entries(groupedData).flatMap(([year, months]) =>
                     Object.entries(months)
                         .sort((a, b) => parseInt(a[0]) - parseInt(b[0]))
                         .map(([month, weeks]) => (
-                            <Month key={`${year}-${month}`} year={year} month={month} weeks={weeks} />
+                            <Month key={`${year}-${month}`} year={year} month={month} weeks={weeks} sortOption={sortOption} />
                         ))
                 );
             case "week":
@@ -31,7 +31,7 @@ function List({ data }: { data: FinancialData }): JSX.Element {
                             Object.entries(weeks)
                                 .sort((a, b) => parseInt(a[0]) - parseInt(b[0]))
                                 .map(([week, days]) => (
-                                    <Week key={`${year}-${month}-${week}`} year={year} month={month} week={week} days={days} />
+                                    <Week key={`${year}-${month}-${week}`} year={year} month={month} week={week} days={days} sortOption={sortOption} />
                                 ))
                         )
                 );
@@ -46,7 +46,7 @@ function List({ data }: { data: FinancialData }): JSX.Element {
                                     Object.entries(days)
                                         .sort((a, b) => parseInt(a[0]) - parseInt(b[0]))
                                         .map(([day, transactions]) => (
-                                            <Day key={`${year}-${month}-${week}-${day}`} year={year} month={month} week={week} day={day} transactions={transactions} />
+                                            <Day key={`${year}-${month}-${week}-${day}`} year={year} month={month} week={week} day={day} transactions={transactions} sortOption={sortOption} />
                                         ))
                                 )
                         )
@@ -70,49 +70,49 @@ function List({ data }: { data: FinancialData }): JSX.Element {
     );
 }
 
-function Year({ year, months }): JSX.Element {
+function Year({ year, months, sortOption }): JSX.Element {
     return (
         <div>
-            <h3>{year}</h3>
+            {(sortOption === "year" || sortOption === "month" || sortOption === "week" || sortOption === "day") && <h3>{year}</h3>}
             {Object.entries(months)
                 .sort((a, b) => parseInt(a[0]) - parseInt(b[0]))
                 .map(([month, weeks]) => (
-                    <Month key={`${year}-${month}`} year={year} month={month} weeks={weeks} />
+                    <Month key={`${year}-${month}`} year={year} month={month} weeks={weeks} sortOption={sortOption} />
                 ))}
         </div>
     );
 }
 
-function Month({ year, month, weeks }): JSX.Element {
+function Month({ year, month, weeks, sortOption }): JSX.Element {
     return (
         <div>
-            <h4>{year} - Month {month}</h4>
+            {(sortOption === "month" || sortOption === "week" || sortOption === "day") && <h4>{year} - Month {month}</h4>}
             {Object.entries(weeks)
                 .sort((a, b) => parseInt(a[0]) - parseInt(b[0]))
                 .map(([week, days]) => (
-                    <Week key={`${year}-${month}-${week}`} year={year} month={month} week={week} days={days} />
+                    <Week key={`${year}-${month}-${week}`} year={year} month={month} week={week} days={days} sortOption={sortOption} />
                 ))}
         </div>
     );
 }
 
-function Week({ year, month, week, days }): JSX.Element {
+function Week({ year, month, week, days, sortOption }): JSX.Element {
     return (
         <div>
-            <h5>{year} - Month {month} - Week {week}</h5>
+            {(sortOption === "week" || sortOption === "day") && <h5>{year} - Month {month} - Week {week}</h5>}
             {Object.entries(days)
                 .sort((a, b) => parseInt(a[0]) - parseInt(b[0]))
                 .map(([day, transactions]) => (
-                    <Day key={`${year}-${month}-${week}-${day}`} year={year} month={month} week={week} day={day} transactions={transactions} />
+                    <Day key={`${year}-${month}-${week}-${day}`} year={year} month={month} week={week} day={day} transactions={transactions} sortOption={sortOption} />
                 ))}
         </div>
     );
 }
 
-function Day({ year, month, week, day, transactions }): JSX.Element {
+function Day({ year, month, week, day, transactions, sortOption }): JSX.Element {
     return (
         <div>
-            <h6>{year} - Month {month} - Week {week} - Day {day}</h6>
+            {(sortOption === "day") && <h6>{year} - Month {month} - Week {week} - Day {day}</h6>}
             <ul>
                 {transactions.map((transaction) => (
                     <li key={transaction.id}>
