@@ -8,7 +8,7 @@ function Calendar({ data }): JSX.Element {
     const [currentDay, setCurrentDay] = useState(new Date());
 
     return (
-        <div className="calendar">
+        <div className="calendar-view">
             <div className="calendar-header">
                 <h2>Calendar</h2>
                 {currentDay.getDate()} {months[currentDay.getMonth()]} {currentDay.getFullYear()}

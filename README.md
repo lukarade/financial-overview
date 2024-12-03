@@ -40,7 +40,12 @@ Start Date: 2024-30-11
 
 ## List Component
 ### Alternative view to the calendar component (optional)
-- [ ] Create a list component that displays all the income and expenses for the current year/month/week/day.
+- [x] Create a list component that displays all the income and expenses for the current year/month/week/day.
+- [] Add filters to sort the events by:
+  - [x] Date (2024-02-12)
+  - [ ] Amount
+  - [ ] Category
+  - [ ] Type
 - [ ] Add a button to navigate to the next month.
 - [ ] Add a button to navigate to the previous month.
 
