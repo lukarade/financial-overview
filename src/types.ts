@@ -56,5 +56,14 @@ interface GroupedTransactions {
 }
 
 
+type OverviewData = {
+    months: {
+        year: string,
+        month: string,
+        totalExpense: number,
+        totalIncome: number,
+    }[];
+}
 
-export { CalendarDay, FinancialData, Expense, Income, GroupedTransactions, DayTransactions, WeekTransactions, MonthTransactions, YearTransactions };
+
+export { CalendarDay, FinancialData, Expense, Income, GroupedTransactions, DayTransactions, WeekTransactions, MonthTransactions, YearTransactions, OverviewData };

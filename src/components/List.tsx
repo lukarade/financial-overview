@@ -1,13 +1,12 @@
 import React, { useState } from "react";
-import { FinancialData } from "../types";
-import { groupTransactionsByDate } from "../utils/listUtils.ts";
+import { GroupedTransactions } from "../types";
 import ListYear from "./ListYear.tsx";
 
 import "../styles/list.css";
 
-function List({ data }: { data: FinancialData }): JSX.Element {
+function List({ groupedData }: { groupedData: GroupedTransactions }): JSX.Element {
     const [sortOption, setSortOption] = useState<"year" | "month" | "week" | "day">("month");
-    const groupedData = groupTransactionsByDate(data);
+    // const groupedData = groupTransactionsByDate(data);
 
     const renderTransactions = () => {
         return Object.entries(groupedData)

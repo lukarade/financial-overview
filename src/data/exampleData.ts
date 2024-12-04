@@ -252,8 +252,15 @@ const exampleData: FinancialData = {
             id: "id36",
             name: "Lottery Winnings",
             amount: 200,
-            date: "2024-05-10",
+            date: "2024-06-10",
             category: "Other"
+        },
+        {
+            id: "id37",
+            name: "Refund",
+            amount: 30,
+            date: "2024-12-05",
+            category: "Personal Care"
         }
     ]
 };

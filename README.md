@@ -26,6 +26,12 @@ Start Date: 2024-30-11
 
 ## Overview Component
 - [ ] Create an overview component that displays the total income and expenses for the current year/month/week/day.
+
+- [x] Create a bar chart that displays the total income and expenses for the current (2024-04-12)
+  - [x] year: by month (2024-04-12)
+  - [ ] month: by week
+  - [ ] week: by day
+
 - [ ] Create a pie chart that displays the percentage of income and expenses for the current month.
 - [ ] Add a button to navigate to the next month.
 - [ ] Add a button to navigate to the previous month.
@@ -61,3 +67,12 @@ Start Date: 2024-30-11
 - [ ] The categories should be clickable to display the events that belong to them.
 - [ ] The categories should be highlighted when hovered over.
    
+
+## General
+
+- [ ] Add option to change the currency.
+- [ ] Add option to change the language.
+- [ ] Add option to change the theme.
+
+### Bugs 
+- [ ] Fix the sorting of the events in the list component. The events are not sorted by date correctly. 

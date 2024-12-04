@@ -3,6 +3,8 @@ import Calendar from "../../components/Calender.tsx";
 import List from "../../components/List.tsx";
 
 import { exampleData } from "../../data/exampleData.ts";
+import Overview from "../../components/Overview.tsx";
+import { groupTransactionsByDate } from "../../utils/listUtils.ts";
 
 // TODO: Clean up the styles when the layout is finalized
 
@@ -64,19 +66,20 @@ const overviewStyle: CSSProperties = {
 };
 
 function OverviewView() {
+    const groupedData = groupTransactionsByDate(exampleData);
+
     return (
         <div style={overviewViewStyle}>
             {/* <h2>OverviewView</h2> */}
             {/* List Component will be an alternative for the Calendar view, for now it is easier to display the data in an list */}
             <div style={{ ...calendarStyle, ...overviewComponentStyle }}>
                 <h3>Calendar</h3>
-                {/* <Calendar data={exampleData} /> */}
-                <List data={exampleData} />
+                {/* <Calendar data={groupedData} /> */}
+                <List groupedData={groupedData} />
             </div>
             <div style={{ ...overviewStyle, ...overviewComponentStyle }}>
                 <h3>Overview</h3>
-                <p>Overview go here</p>
-                <p>Options go here</p>
+                <Overview groupedData={groupedData} />
             </div>
         </div>
     );
