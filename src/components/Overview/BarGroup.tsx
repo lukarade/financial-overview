@@ -1,7 +1,7 @@
 import React from 'react';
 import Bar from "./Bar.tsx";
 
-import { monthsShort } from "../data/constances.ts";
+import { monthsShort } from "../../data/constances.ts";
 
 interface BarGroupProps {
     data: any;

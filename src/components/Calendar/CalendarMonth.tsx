@@ -1,9 +1,9 @@
 import React, { useMemo } from 'react';
-import { getWeekNumber } from '../utils/calendarUtils.ts';
-import { CalendarDay } from '../types';
+import { getWeekNumber } from '../../utils/calendarUtils.ts';
+import { CalendarDay } from '../../types.ts';
 import CalendarDayComponent from './CalendarDay.tsx';
 
-import { weekDays } from '../data/constances.ts';
+import { weekDays } from '../../data/constances.ts';
 
 interface CalendarMonthProps {
     currentDay: Date;

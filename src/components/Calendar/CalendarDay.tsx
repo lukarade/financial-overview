@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { CalendarDay } from '../types';
+import { CalendarDay } from '../../types';
 
 
 function CalendarDayComponent(calendarDay: CalendarDay): JSX.Element {

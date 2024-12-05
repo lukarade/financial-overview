@@ -1,10 +1,10 @@
 import React from "react";
 import OverviewOptions from "./OverviewOptions.tsx";
-import { GroupedTransactions, MonthTransactions } from "../types.ts";
-import { OverviewData } from "../types.ts";
+import { GroupedTransactions, MonthTransactions } from "../../types.ts";
+import { OverviewData } from "../../types.ts";
 import Chart from "./Chart.tsx";
 
-import "../styles/bar-chart.css";
+import "../../styles/bar-chart.css";
 
 
 function Overview({ groupedData }: { groupedData: GroupedTransactions }): JSX.Element {

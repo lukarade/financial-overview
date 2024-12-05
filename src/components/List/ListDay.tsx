@@ -1,5 +1,5 @@
 import React from "react";
-import { Expense, Income } from "../types";
+import { Expense, Income } from "../../types";
 
 interface DayProps {
     year: string;

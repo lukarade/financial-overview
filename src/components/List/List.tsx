@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { GroupedTransactions } from "../types";
+import { GroupedTransactions } from "../../types.ts";
 import ListYear from "./ListYear.tsx";
 
-import "../styles/list.css";
+import "../../styles/list.css";
 
 function List({ groupedData }: { groupedData: GroupedTransactions }): JSX.Element {
     const [sortOption, setSortOption] = useState<"year" | "month" | "week" | "day">("month");

@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 
 import CalendarMonth from "./CalendarMonth.tsx";
-import "../styles/calendar.css";
-import { months } from "../data/constances.ts";
+import "../../styles/calendar.css";
+import { months } from "../../data/constances.ts";
 
 function Calendar({ data }): JSX.Element {
     const [currentDay, setCurrentDay] = useState(new Date());

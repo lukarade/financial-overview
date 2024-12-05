@@ -1,5 +1,5 @@
 import React from "react";
-import { DayTransactions } from "../types";
+import { DayTransactions } from "../../types.ts";
 import ListDay from "./ListDay.tsx";
 
 interface WeekProps {

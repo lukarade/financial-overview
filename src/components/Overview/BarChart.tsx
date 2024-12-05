@@ -1,6 +1,6 @@
 import React from 'react';
 import BarGroup from './BarGroup.tsx';
-import { OverviewData } from '../types.tsx';
+import { OverviewData } from '../../types.ts';
 
 interface BarChartProps {
     overviewData: OverviewData;

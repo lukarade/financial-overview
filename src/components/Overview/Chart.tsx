@@ -1,6 +1,6 @@
 import React from "react";
 import BarChart from "./BarChart.tsx";
-import { OverviewData } from "../types.ts";
+import { OverviewData } from "../../types.ts";
 
 function Chart({ overviewData }: { overviewData: OverviewData }): JSX.Element {
     const barHeight = 20;
