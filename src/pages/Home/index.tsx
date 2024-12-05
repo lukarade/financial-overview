@@ -1,4 +1,4 @@
-import React, { CSSProperties } from "react";
+import React, { CSSProperties, useState } from "react";
 import Calendar from "../../components/Calendar/Calender.tsx";
 import List from "../../components/List/List.tsx";
 
@@ -57,7 +57,7 @@ const overviewComponentStyle: CSSProperties = {
 
 }
 
-const calendarStyle: CSSProperties = {
+const calendarFrameStyle: CSSProperties = {
     outline: "3px solid yellow",
 };
 
@@ -65,17 +65,26 @@ const overviewStyle: CSSProperties = {
     outline: "3px solid orange",
 };
 
+
 function OverviewView() {
+    const [viewMode, setViewMode] = useState<"calendar" | "list">("calendar");
     const groupedData = groupTransactionsByDate(exampleData);
+
+    const toggleViewMode = () => {
+        setViewMode(prevMode => (prevMode === "calendar" ? "list" : "calendar"));
+    };
 
     return (
         <div style={overviewViewStyle}>
-            {/* <h2>OverviewView</h2> */}
-            {/* List Component will be an alternative for the Calendar view, for now it is easier to display the data in an list */}
-            <div style={{ ...calendarStyle, ...overviewComponentStyle }}>
-                <h3>Calendar</h3>
-                <Calendar data={groupedData} />
-                {/* <List groupedData={groupedData} /> */}
+            <div style={{ ...calendarFrameStyle, ...overviewComponentStyle }}>
+                <button onClick={toggleViewMode}>
+                    Switch to {viewMode === "calendar" ? "List View" : "Calendar View"}
+                </button>
+                {viewMode === "calendar" ? (
+                    <Calendar groupedData={groupedData} />
+                ) : (
+                    <List groupedData={groupedData} />
+                )}
             </div>
             <div style={{ ...overviewStyle, ...overviewComponentStyle }}>
                 <h3>Overview</h3>

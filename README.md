@@ -11,7 +11,7 @@ Start Date: 2024-30-11
 - [x] Create a calendar component that displays the current month and year. (2024-30-11)
 - [x] Display the number of the week in the year. (2024-01-12)
 - [ ] Display the total income and expenses for the current month.
-- 
+  
 - [x] Add a button to navigate to the next month. (2024-05-12)
 - [x] Add a button to navigate to the previous month. (2024-05-12)
 - [x] Add a button to navigate to the month of the current day. (2024-05-12)
@@ -24,6 +24,7 @@ Start Date: 2024-30-11
 - [ ] Add a form to add a new event to the calendar.
 - [ ] Add a button to delete an event from the calendar.
 
+### Improvements
 - [ ] If the last displayed week row clomplety is of the next month, display the last week row of the previous month on top of the calendar instead (See September 2025 for an example). 
 
 ## Overview Component
@@ -48,7 +49,7 @@ Start Date: 2024-30-11
   
 
 ## List Component
-### Alternative view to the calendar component (optional)
+### Alternative view to the calendar component
 - [x] Create a list component that displays all the income and expenses for the current year/month/week/day.
 - [] Add filters to sort the events by:
   - [x] Date (2024-02-12)
@@ -58,8 +59,8 @@ Start Date: 2024-30-11
 - [x] Display the total income and expenses for the current year/month/week/day. (2024-03-12)
 - [ ] Add a button to navigate to the next month.
 - [ ] Add a button to navigate to the previous month.
-#### Bugs
-- [ ] Fix the bug that causes the list to generate month/ week/ day components for total income and expenses (which of course are not events). These are not displayed by a workaround with a guard clause in the coresponding component.
+### Bugs
+- [x] Fix the bug that causes the list to generate month/ week/ day components for total income and expenses (which of course are not events). These are not displayed by a workaround with a guard clause in the coresponding component.
 
 
 ## Financial Flow Component
@@ -76,5 +77,5 @@ Start Date: 2024-30-11
 - [ ] Add option to change the language.
 - [ ] Add option to change the theme.
 
-### Bugs 
+## Bugs 
 - [ ] Fix the sorting of the events in the list component. The events are not sorted by date correctly. 

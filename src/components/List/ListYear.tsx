@@ -17,12 +17,15 @@ function ListYear({ year, months, totalExpenseYear, totalIncomeYear, sortOption 
             {Object.entries(months)
                 .sort((a, b) => parseInt(a[0]) - parseInt(b[0]))
                 .map(([month, weekData]) => {
-                    const weeks = weekData || [];
-                    const totalExpenseMonth = -weekData?.totalExpense || 0;
-                    const totalIncomeMonth = weekData?.totalIncome || 0;
-                    return (
-                        <ListMonth key={`${year}-${month}`} year={year} month={month} weeks={weeks} totalExpenseMonth={totalExpenseMonth} totalIncomeMonth={totalIncomeMonth} sortOption={sortOption} />
-                    );
+                    if (month !== "totalExpense" && month !== "totalIncome") {
+                        const weeks = weekData || [];
+                        const totalExpenseMonth = -weekData?.totalExpense || 0;
+                        const totalIncomeMonth = weekData?.totalIncome || 0;
+                        return (
+                            <ListMonth key={`${year}-${month}`} year={year} month={month} weeks={weeks} totalExpenseMonth={totalExpenseMonth} totalIncomeMonth={totalIncomeMonth} sortOption={sortOption} />
+                        );
+                    }
+                    return null;
                 })}
         </div>
     );

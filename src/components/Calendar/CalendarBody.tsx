@@ -5,21 +5,18 @@ import CalendarDayComponent from './CalendarDay.tsx';
 
 import { weekDays } from '../../data/constances.ts';
 
-interface CalendarMonthProps {
+interface CalendarBodyProps {
     currentDay: Date;
     onDayClick: (day: Date) => void;
 }
 
-function CalendarMonth({ currentDay, onDayClick }: CalendarMonthProps): JSX.Element {
+function CalendarBody({ currentDay, onDayClick }: CalendarBodyProps): JSX.Element {
     const firstDayOfMonth = useMemo(() => new Date(currentDay.getFullYear(), currentDay.getMonth(), 1), [currentDay]);
     const weekdayOfFirstDay = firstDayOfMonth.getDay();
 
     let currentMonth: CalendarDayType[] = [];
 
-
-
     for (let day = 0; day < 42; day++) {
-
         if (day === 0 && weekdayOfFirstDay === 0) {
             firstDayOfMonth.setDate(firstDayOfMonth.getDate() - 6);
         } else if (day === 0) {
@@ -33,12 +30,11 @@ function CalendarMonth({ currentDay, onDayClick }: CalendarMonthProps): JSX.Elem
     const weeks = [...new Set(currentMonth.map(day => day.week))];
 
     return (
-        // display the calendar week numbers as a column on the left side of the calendar
-        <div className="calendar-month">
+        <div className="calendar-body">
             <div className="week-number-column">
-                {weeks.map((week, index) => (
+                {weeks.map((calendarWeekNumber, index) => (
                     <div key={index} className="week-number">
-                        {week}
+                        {calendarWeekNumber}
                     </div>
                 ))}
             </div>
@@ -52,7 +48,7 @@ function CalendarMonth({ currentDay, onDayClick }: CalendarMonthProps): JSX.Elem
                 {
                     currentMonth.map((day) => {
                         return (
-                            <CalendarDayComponent key={day.date.toISOString()} calendarDay={day} onDayClick={onDayClick} />
+                            <CalendarDayComponent key={`${day.year}-${day.month}-${day.week}-${day.day}`} calendarDay={day} onDayClick={onDayClick} />
                         );
                     })
                 }
@@ -62,4 +58,4 @@ function CalendarMonth({ currentDay, onDayClick }: CalendarMonthProps): JSX.Elem
 
 }
 
-export default CalendarMonth;
+export default CalendarBody;
