@@ -12,17 +12,19 @@ Start Date: 2024-30-11
 - [x] Display the number of the week in the year. (2024-01-12)
 - [ ] Display the total income and expenses for the current month.
 - 
-- [ ] Add a button to navigate to the next month.
-- [ ] Add a button to navigate to the previous month.
-- [ ] Add a button to navigate to the month of the current day.
-- [ ] Add a button to navigate to the next year.
-- [ ] Add a button to navigate to the previous year.
+- [x] Add a button to navigate to the next month. (2024-05-12)
+- [x] Add a button to navigate to the previous month. (2024-05-12)
+- [x] Add a button to navigate to the month of the current day. (2024-05-12)
+- [x] Add a button to navigate to the next year. (2024-05-12)
+- [x] Add a button to navigate to the previous year. (2024-05-12)
 
 - [ ] Left click on a day to add an expense / income.
 - [ ] Open a modal when a day is clicked.
 - [ ] Add a button to close the modal.
 - [ ] Add a form to add a new event to the calendar.
 - [ ] Add a button to delete an event from the calendar.
+
+- [ ] If the last displayed week row clomplety is of the next month, display the last week row of the previous month on top of the calendar instead (See September 2025 for an example). 
 
 ## Overview Component
 - [ ] Create an overview component that displays the total income and expenses for the current year/month/week/day.

@@ -75,7 +75,7 @@ function OverviewView() {
             <div style={{ ...calendarStyle, ...overviewComponentStyle }}>
                 <h3>Calendar</h3>
                 <Calendar data={groupedData} />
-                <List groupedData={groupedData} />
+                {/* <List groupedData={groupedData} /> */}
             </div>
             <div style={{ ...overviewStyle, ...overviewComponentStyle }}>
                 <h3>Overview</h3>
@@ -104,8 +104,8 @@ export default function Home() {
             <Header />
             <Navigation />
             <OverviewView />
-            <FlowView />
-            <Footer />
+            {/* <FlowView /> */}
+            {/* <Footer /> */}
         </div>
     );
 }

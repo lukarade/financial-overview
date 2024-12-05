@@ -1,13 +1,25 @@
 
 import React from 'react';
-import { CalendarDay } from '../../types';
+import { CalendarDayType } from '../../types';
+
+interface CalendarDayProps {
+    calendarDay: CalendarDayType,
+    onDayClick: (day: Date) => void;
+
+}
 
 
-function CalendarDayComponent(calendarDay: CalendarDay): JSX.Element {
+function CalendarDayComponent({ calendarDay, onDayClick }: CalendarDayProps): JSX.Element {
+    const handleClick = () => {
+        onDayClick(calendarDay.date);
+    }
+
     return (
         <div className={"calendar-day" + (calendarDay.currentMonth ? " current" : "") + (calendarDay.selected ? " selected" : "")}
             role="button"
-            aria-pressed="false">
+            aria-pressed="false"
+            onClick={handleClick}
+        >
             <p>{calendarDay.day}</p>
         </div>
     );

@@ -1,44 +1,33 @@
 import React, { useMemo } from 'react';
-import { getWeekNumber } from '../../utils/calendarUtils.ts';
-import { CalendarDay } from '../../types.ts';
+import { createCalendarDay } from '../../utils/calendarUtils.ts';
+import { CalendarDayType } from '../../types.ts';
 import CalendarDayComponent from './CalendarDay.tsx';
 
 import { weekDays } from '../../data/constances.ts';
 
 interface CalendarMonthProps {
     currentDay: Date;
+    onDayClick: (day: Date) => void;
 }
 
-function CalendarMonth({ currentDay }: CalendarMonthProps): JSX.Element {
+function CalendarMonth({ currentDay, onDayClick }: CalendarMonthProps): JSX.Element {
     const firstDayOfMonth = useMemo(() => new Date(currentDay.getFullYear(), currentDay.getMonth(), 1), [currentDay]);
     const weekdayOfFirstDay = firstDayOfMonth.getDay();
 
-    let currentMonth: CalendarDay[] = [];
+    let currentMonth: CalendarDayType[] = [];
 
-    function createCalendarDay(date: Date): CalendarDay {
-        const res = {
-            currentMonth: date.getMonth() === currentDay.getMonth(),
-            date: new Date(date),
-            day: date.getDate(),
-            week: getWeekNumber(date),
-            month: date.getMonth(),
-            year: date.getFullYear(),
-            selected: date.toDateString() === currentDay.toDateString(),
-        };
-        // console.log(res);
-        return res;
-    }
+
 
     for (let day = 0; day < 42; day++) {
 
         if (day === 0 && weekdayOfFirstDay === 0) {
             firstDayOfMonth.setDate(firstDayOfMonth.getDate() - 6);
         } else if (day === 0) {
-            firstDayOfMonth.setDate(firstDayOfMonth.getDate() + (day - weekdayOfFirstDay));
+            firstDayOfMonth.setDate(firstDayOfMonth.getDate() + (day - weekdayOfFirstDay + 1));
         } else {
             firstDayOfMonth.setDate(firstDayOfMonth.getDate() + 1);
         }
-        currentMonth.push(createCalendarDay(firstDayOfMonth));
+        currentMonth.push(createCalendarDay(firstDayOfMonth, currentDay));
     }
 
     const weeks = [...new Set(currentMonth.map(day => day.week))];
@@ -63,7 +52,7 @@ function CalendarMonth({ currentDay }: CalendarMonthProps): JSX.Element {
                 {
                     currentMonth.map((day) => {
                         return (
-                            <CalendarDayComponent key={day.date.toISOString()} {...day} />
+                            <CalendarDayComponent key={day.date.toISOString()} calendarDay={day} onDayClick={onDayClick} />
                         );
                     })
                 }

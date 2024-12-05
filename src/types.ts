@@ -1,4 +1,4 @@
-interface CalendarDay {
+interface CalendarDayType {
     currentMonth: boolean;
     date: Date;
     day: number;
@@ -66,4 +66,4 @@ type OverviewData = {
 }
 
 
-export { CalendarDay, FinancialData, Expense, Income, GroupedTransactions, DayTransactions, WeekTransactions, MonthTransactions, YearTransactions, OverviewData };
+export { CalendarDayType, FinancialData, Expense, Income, GroupedTransactions, DayTransactions, WeekTransactions, MonthTransactions, YearTransactions, OverviewData };
