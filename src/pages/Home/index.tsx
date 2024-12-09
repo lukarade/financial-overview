@@ -5,6 +5,8 @@ import List from "../../components/List/List.tsx";
 import { exampleData } from "../../data/exampleData.ts";
 import Overview from "../../components/Overview/Overview.tsx";
 import { groupTransactionsByDate } from "../../utils/listUtils.ts";
+import TransactionList from "../../components/TransactionList.tsx";
+import { getDataForSelectedDay } from "../../utils/utils.ts";
 
 // TODO: Clean up the styles when the layout is finalized
 
@@ -68,7 +70,9 @@ const overviewStyle: CSSProperties = {
 
 function OverviewView() {
     const [viewMode, setViewMode] = useState<"calendar" | "list">("calendar");
+    const [currentSelectedDay, updateDisplayedDay] = useState(new Date());
     const groupedData = groupTransactionsByDate(exampleData);
+    const dataForSelectedDay = getDataForSelectedDay(currentSelectedDay, groupedData);
 
     const toggleViewMode = () => {
         setViewMode(prevMode => (prevMode === "calendar" ? "list" : "calendar"));
@@ -76,12 +80,13 @@ function OverviewView() {
 
     return (
         <div style={overviewViewStyle}>
+            <TransactionList data={dataForSelectedDay} currentSelectedDay={currentSelectedDay} />
             <div style={{ ...calendarFrameStyle, ...overviewComponentStyle }}>
                 <button onClick={toggleViewMode}>
                     Switch to {viewMode === "calendar" ? "List View" : "Calendar View"}
                 </button>
                 {viewMode === "calendar" ? (
-                    <Calendar groupedData={groupedData} />
+                    <Calendar groupedData={groupedData} currentSelectedDay={currentSelectedDay} updateDisplayedDay={updateDisplayedDay} />
                 ) : (
                     <List groupedData={groupedData} />
                 )}

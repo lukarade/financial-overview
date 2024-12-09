@@ -1,0 +1,21 @@
+.transaction-view {
+    outline: 1px solid pink;
+    min-width: 20%;
+    max-width: 20%;
+}
+
+.transaction {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    margin: 10px;
+    border: 1px solid #a6a6a6;
+    border-radius: 5px;
+    box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.1);
+}
+
+.transaction > p {
+    margin: 5px;
+}

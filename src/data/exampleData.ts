@@ -261,6 +261,20 @@ const exampleData: FinancialData = {
             amount: 30,
             date: "2024-12-05",
             category: "Personal Care"
+        },
+        {
+            id: "id38",
+            name: "Refund2",
+            amount: 30,
+            date: "2024-12-05",
+            category: "Personal Care"
+        },
+        {
+            id: "id39",
+            name: "Refund3",
+            amount: 300,
+            date: "2024-12-05",
+            category: "Personal Care"
         }
     ]
 };

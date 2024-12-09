@@ -1,10 +1,15 @@
-import React, { useState } from "react";
+import React from "react";
 import CalendarBody from "./CalendarBody.tsx";
 import "../../styles/calendar.css";
 import CalendarNavigation from "./CalendarNavigation.tsx";
 
-function Calendar({ groupedData }): JSX.Element {
-    const [currentSelectedDay, updateDisplayedDay] = useState(new Date());
+interface CalendarProps {
+    groupedData: any;
+    currentSelectedDay: Date;
+    updateDisplayedDay: (day: Date) => void;
+}
+
+function Calendar({ groupedData, currentSelectedDay, updateDisplayedDay }: CalendarProps): JSX.Element {
     const currentDate = new Date();
 
     const handleDayClick = (day: Date) => {

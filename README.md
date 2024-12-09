@@ -19,14 +19,23 @@ Start Date: 2024-30-11
 - [x] Add a button to navigate to the next year. (2024-05-12)
 - [x] Add a button to navigate to the previous year. (2024-05-12)
 
-- [ ] Left click on a day to add an expense / income.
-- [ ] Open a modal when a day is clicked.
+- [ ] Double click on a day to add an expense / income.
+- [ ] Open a modal when a day is double clicked.
 - [ ] Add a button to close the modal.
 - [ ] Add a form to add a new event to the calendar.
 - [ ] Add a button to delete an event from the calendar.
 
 ### Improvements
 - [ ] If the last displayed week row clomplety is of the next month, display the last week row of the previous month on top of the calendar instead (See September 2025 for an example). 
+
+## Transaction Component
+- [x] Create a transaction component that displays the details of an event. (2024-09-12)
+- [x] Display the date, amount, category, and type of the event. (2024-09-12)
+- [ ] Add a button to edit the event.
+- [ ] Add a button to delete the event.
+- [ ] Add a button to close the transaction component. ??
+- [ ] Add a button to navigate to the next/prev event (not the next day but the next transaction).
+
 
 ## Overview Component
 - [ ] Create an overview component that displays the total income and expenses for the current year/month/week/day.
