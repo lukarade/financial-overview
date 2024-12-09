@@ -6,6 +6,7 @@ interface CalendarDayType {
     month: number;
     year: number;
     selected: boolean;
+    data?: any; //TODO: Define the type
 }
 
 interface FinancialData {

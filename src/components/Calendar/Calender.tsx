@@ -5,8 +5,7 @@ import CalendarNavigation from "./CalendarNavigation.tsx";
 
 function Calendar({ groupedData }): JSX.Element {
     const [currentSelectedDay, updateDisplayedDay] = useState(new Date());
-    const [currentDate, setCurrentDate] = useState(new Date());
-
+    const currentDate = new Date();
 
     const handleDayClick = (day: Date) => {
         updateDisplayedDay(day);
@@ -18,7 +17,7 @@ function Calendar({ groupedData }): JSX.Element {
                 <CalendarNavigation currentSelectedDay={currentSelectedDay} updateDisplayedDay={updateDisplayedDay} />
                 {currentDate.toDateString()}
             </div>
-            <CalendarBody currentDay={currentSelectedDay} onDayClick={handleDayClick} />
+            <CalendarBody groupedData={groupedData} currentSelectedDay={currentSelectedDay} onDayClick={handleDayClick} />
 
         </div>
     );

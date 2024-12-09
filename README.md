@@ -10,6 +10,7 @@ Start Date: 2024-30-11
 
 - [x] Create a calendar component that displays the current month and year. (2024-30-11)
 - [x] Display the number of the week in the year. (2024-01-12)
+- [x] Display the transactions for each day in the calendar. (2024-09-12)
 - [ ] Display the total income and expenses for the current month.
   
 - [x] Add a button to navigate to the next month. (2024-05-12)

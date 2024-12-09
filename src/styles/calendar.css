@@ -100,3 +100,16 @@
     color: #cc0000;
     font-weight: bold;
 }
+
+.calendar-transaction {
+    height: 15px;
+    width: 15px;
+    background-color: #b1b1b1;
+    border-radius: 20%;
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

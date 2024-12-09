@@ -1,19 +1,27 @@
 import React, { useMemo } from 'react';
-import { createCalendarDay } from '../../utils/calendarUtils.ts';
-import { CalendarDayType } from '../../types.ts';
+import { createCalendarDay, getMonthTransactions } from '../../utils/calendarUtils.ts';
+import { CalendarDayType, GroupedTransactions } from '../../types.ts';
 import CalendarDayComponent from './CalendarDay.tsx';
 
 import { weekDays } from '../../data/constances.ts';
 
 interface CalendarBodyProps {
-    currentDay: Date;
+    groupedData: GroupedTransactions;
+    currentSelectedDay: Date;
     onDayClick: (day: Date) => void;
 }
 
-function CalendarBody({ currentDay, onDayClick }: CalendarBodyProps): JSX.Element {
-    const firstDayOfMonth = useMemo(() => new Date(currentDay.getFullYear(), currentDay.getMonth(), 1), [currentDay]);
-    const weekdayOfFirstDay = firstDayOfMonth.getDay();
+function CalendarBody({ groupedData, currentSelectedDay, onDayClick }: CalendarBodyProps): JSX.Element {
+    const firstDayOfMonth = useMemo(() =>
+        new Date(currentSelectedDay.getFullYear(), currentSelectedDay.getMonth(), 1),
+        [currentSelectedDay]);
 
+    const monthTransactions = useMemo(() => {
+        return getMonthTransactions(currentSelectedDay.getFullYear(), currentSelectedDay.getMonth() + 1, groupedData);
+    },
+        [currentSelectedDay, groupedData]);
+
+    const weekdayOfFirstDay = firstDayOfMonth.getDay();
     let currentMonth: CalendarDayType[] = [];
 
     for (let day = 0; day < 42; day++) {
@@ -24,7 +32,7 @@ function CalendarBody({ currentDay, onDayClick }: CalendarBodyProps): JSX.Elemen
         } else {
             firstDayOfMonth.setDate(firstDayOfMonth.getDate() + 1);
         }
-        currentMonth.push(createCalendarDay(firstDayOfMonth, currentDay));
+        currentMonth.push(createCalendarDay(firstDayOfMonth, currentSelectedDay, monthTransactions));
     }
 
     const weeks = [...new Set(currentMonth.map(day => day.week))];
@@ -48,7 +56,10 @@ function CalendarBody({ currentDay, onDayClick }: CalendarBodyProps): JSX.Elemen
                 {
                     currentMonth.map((day) => {
                         return (
-                            <CalendarDayComponent key={`${day.year}-${day.month}-${day.week}-${day.day}`} calendarDay={day} onDayClick={onDayClick} />
+                            <CalendarDayComponent
+                                key={`${day.year}-${day.month}-${day.week}-${day.day}`}
+                                calendarDay={day}
+                                onDayClick={onDayClick} />
                         );
                     })
                 }

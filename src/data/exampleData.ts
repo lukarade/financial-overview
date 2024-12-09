@@ -159,14 +159,14 @@ const exampleData: FinancialData = {
             id: "id25",
             name: "Parking",
             amount: -20,
-            date: "2024-05-01",
+            date: "2024-11-01",
             category: "Transportation"
         },
         {
             id: "id26",
             name: "Haircut",
             amount: -30,
-            date: "2024-12-05",
+            date: "2024-12-25",
             category: "Personal Care"
         }
     ],

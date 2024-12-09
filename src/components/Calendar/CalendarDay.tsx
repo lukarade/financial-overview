@@ -1,11 +1,11 @@
 
 import React from 'react';
 import { CalendarDayType } from '../../types';
+import CalendarTransaction from './CalendarTransaction.tsx';
 
 interface CalendarDayProps {
     calendarDay: CalendarDayType,
     onDayClick: (day: Date) => void;
-
 }
 
 
@@ -21,6 +21,7 @@ function CalendarDayComponent({ calendarDay, onDayClick }: CalendarDayProps): JS
             onClick={handleClick}
         >
             <p>{calendarDay.day}</p>
+            {calendarDay.data && <CalendarTransaction> + </CalendarTransaction>}
         </div>
     );
 }

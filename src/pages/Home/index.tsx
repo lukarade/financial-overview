@@ -109,7 +109,7 @@ function FlowView() {
 
 export default function Home() {
     return (
-        <div>
+        <div className="prevent-select">
             <Header />
             <Navigation />
             <OverviewView />
