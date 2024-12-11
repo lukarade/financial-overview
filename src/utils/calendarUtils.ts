@@ -1,7 +1,7 @@
-import { CalendarDayType, GroupedTransactions } from '../types';
+import { CalendarDayType, GroupedTransactions, MonthTransactions } from '../types';
 import { getWeekNumber } from './utils.ts';
 
-function createCalendarDay(date: Date, currentSelectedDay: Date, monthTransactions: any): CalendarDayType {
+function createCalendarDay(date: Date, currentSelectedDay: Date, monthTransactions: MonthTransactions | null): CalendarDayType {
     /**
      * @param {Date} date - the date of the day to create
      * @param {Date} currentSelectedDay - the currently selected day
@@ -22,7 +22,58 @@ function createCalendarDay(date: Date, currentSelectedDay: Date, monthTransactio
     return res;
 }
 
-function getMonthTransactions(year: number, month: number, groupedData: GroupedTransactions) {
+function generateDays(currentSelectedDay: Date, monthTransactions: MonthTransactions | null): CalendarDayType[] {
+    const days: CalendarDayType[] = [];
+    const year = currentSelectedDay.getFullYear();
+    const month = currentSelectedDay.getMonth();
+    const firstDayOfMonth = new Date(year, month, 1);
+    const lastDayOfMonth = new Date(year, month + 1, 0);
+    const firstDayOfWeek = (firstDayOfMonth.getDay() + 6) % 7; // Adjust to start the week on Monday
+    const lastDayOfWeek = (lastDayOfMonth.getDay() + 6) % 7; // Adjust to start the week on Monday
+
+    // Days from the previous month
+    for (let i = firstDayOfWeek - 1; i >= 0; i--) {
+        const day = new Date(year, month, -i);
+        days.push(createCalendarDay(day, currentSelectedDay, monthTransactions));
+    }
+
+    // Days of the current month
+    for (let i = 1; i <= lastDayOfMonth.getDate(); i++) {
+        const day = new Date(year, month, i);
+        days.push(createCalendarDay(day, currentSelectedDay, monthTransactions));
+    }
+
+    // Days from the next month
+    for (let i = 1; i < 7 - lastDayOfWeek; i++) {
+        const day = new Date(year, month + 1, i);
+        days.push(createCalendarDay(day, currentSelectedDay, monthTransactions));
+    }
+
+    // Ensure the calendar always has 6 weeks
+    const totalDays = days.length;
+    if (totalDays < 42) {
+        const daysToAdd = 42 - totalDays;
+        const daysFromPrevMonth = firstDayOfWeek - 1;
+        const daysFromNextMonth = 6 - lastDayOfWeek;
+
+        if (daysFromPrevMonth < daysFromNextMonth) {
+            // Add days from the previous month
+            for (let i = 1; i <= daysToAdd; i++) {
+                const day = new Date(year, month, -daysFromPrevMonth - i);
+                days.unshift(createCalendarDay(day, currentSelectedDay, monthTransactions));
+            }
+        } else {
+            // Add days from the next month
+            for (let i = 1; i <= daysToAdd; i++) {
+                const day = new Date(year, month + 1, daysFromNextMonth + i);
+                days.push(createCalendarDay(day, currentSelectedDay, monthTransactions));
+            }
+        }
+    }
+    return days;
+};
+
+function getMonthTransactions(year: number, month: number, groupedData: GroupedTransactions): MonthTransactions | null {
     const yearTransactions = groupedData[year];
     if (!yearTransactions) {
         return null;
@@ -36,7 +87,7 @@ function getMonthTransactions(year: number, month: number, groupedData: GroupedT
     return monthTransactions;
 }
 
-function getDayTransactions(monthTransactions: any, date: Date): [] | null {
+function getDayTransactions(monthTransactions: MonthTransactions | null, date: Date): [] | null {
     if (!monthTransactions) {
         return null;
     }
@@ -54,5 +105,4 @@ function getDayTransactions(monthTransactions: any, date: Date): [] | null {
     return monthTransactions[weekString][dayString];
 }
 
-
-export { getWeekNumber, createCalendarDay, getMonthTransactions };
+export { getWeekNumber, getMonthTransactions, generateDays };

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import OverviewOptions from "./OverviewOptions.tsx";
 import { GroupedTransactions, MonthTransactions } from "../../types.ts";
 import { OverviewData } from "../../types.ts";
@@ -7,15 +7,24 @@ import Chart from "./Chart.tsx";
 import "../../styles/bar-chart.css";
 
 
-function Overview({ groupedData }: { groupedData: GroupedTransactions }): JSX.Element {
+function Overview({ groupedData }: { groupedData: GroupedTransactions | null }): JSX.Element {
     // const [chartType, setChartType] = useState<"bar">("bar");
     // const [overviewType, setOverviewType] = useState<"year" | "month" | "week" | "day">("month");
+    const [overviewData, setGroupedData] = useState<OverviewData | null>(null);
 
-    // console.log(groupedData);
-    const overviewData = transformGroupedDataToOverviewData(groupedData);
+    useEffect(() => {
+        if (groupedData) {
+            const grouped = transformGroupedDataToOverviewData(groupedData);
+            setGroupedData(grouped);
+            // console.log(grouped);
+        }
+    }, [groupedData]);
 
+    if (!overviewData) {
+        return <div>Loading...</div>;
+    }
     return (<div className="overview-view">
-        <Chart overviewData={overviewData} />
+        {overviewData.months.length > 0 && <Chart overviewData={overviewData} />}
 
         <OverviewOptions />
     </div>

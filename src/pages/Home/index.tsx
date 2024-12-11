@@ -1,4 +1,4 @@
-import React, { CSSProperties, useState } from "react";
+import React, { CSSProperties, useEffect, useState } from "react";
 import Calendar from "../../components/Calendar/Calender.tsx";
 import List from "../../components/List/List.tsx";
 
@@ -6,7 +6,9 @@ import { exampleData } from "../../data/exampleData.ts";
 import Overview from "../../components/Overview/Overview.tsx";
 import { groupTransactionsByDate } from "../../utils/listUtils.ts";
 import TransactionList from "../../components/TransactionList.tsx";
-import { getDataForSelectedDay } from "../../utils/utils.ts";
+import { fetchUserData, getDataForSelectedDay } from "../../utils/utils.ts";
+import { url } from "../../data/constances.ts";
+import { GroupedTransactions, Transaction } from "../../types.ts";
 
 // TODO: Clean up the styles when the layout is finalized
 
@@ -68,10 +70,10 @@ const overviewStyle: CSSProperties = {
 };
 
 
-function OverviewView() {
+function OverviewView({ transactionData }: { transactionData: Transaction[] }) {
     const [viewMode, setViewMode] = useState<"calendar" | "list">("calendar");
     const [currentSelectedDay, updateDisplayedDay] = useState(new Date());
-    const groupedData = groupTransactionsByDate(exampleData);
+    const groupedData = groupTransactionsByDate(transactionData);
     const dataForSelectedDay = getDataForSelectedDay(currentSelectedDay, groupedData);
 
     const toggleViewMode = () => {
@@ -86,7 +88,9 @@ function OverviewView() {
                     Switch to {viewMode === "calendar" ? "List View" : "Calendar View"}
                 </button>
                 {viewMode === "calendar" ? (
-                    <Calendar groupedData={groupedData} currentSelectedDay={currentSelectedDay} updateDisplayedDay={updateDisplayedDay} />
+                    (groupedData &&
+                        <Calendar groupedData={groupedData} currentSelectedDay={currentSelectedDay} updateDisplayedDay={updateDisplayedDay} />
+                    )
                 ) : (
                     <List groupedData={groupedData} />
                 )}
@@ -112,14 +116,37 @@ function FlowView() {
 }
 
 
-export default function Home() {
+function Home() {
+    const [transactionData, setTransactionData] = useState<Transaction[]>([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState<string | null>(null);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const result = await fetchUserData(url);
+            if (result.error) {
+                setError(result.error);
+            } else {
+                setTransactionData(result.data || []);
+            }
+            setLoading(false);
+        };
+        fetchData();
+    }, []);
+
+    if (error) {
+        return <div>Error: {error}</div>;
+    }
+
     return (
         <div className="prevent-select">
             <Header />
             <Navigation />
-            <OverviewView />
+            {loading ? <div>Loading Data...</div> : transactionData.length > 0 && <OverviewView transactionData={transactionData} />}
             {/* <FlowView /> */}
             {/* <Footer /> */}
         </div>
     );
 }
+
+export default Home;

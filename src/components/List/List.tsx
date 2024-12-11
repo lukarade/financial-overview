@@ -1,14 +1,18 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { GroupedTransactions } from "../../types.ts";
 import ListYear from "./ListYear.tsx";
 
 import "../../styles/list.css";
 
-function List({ groupedData }: { groupedData: GroupedTransactions }): JSX.Element {
+function List({ groupedData }: { groupedData: GroupedTransactions | null }): JSX.Element {
     const [sortOption, setSortOption] = useState<"year" | "month" | "week" | "day">("month");
     // const groupedData = groupTransactionsByDate(data);
 
     const renderTransactions = () => {
+        if (!groupedData) {
+            return null;
+        }
+
         return Object.entries(groupedData)
             .sort((a, b) => parseInt(a[0]) - parseInt(b[0]))
             .map(([year, monthData]) => {
@@ -32,7 +36,7 @@ function List({ groupedData }: { groupedData: GroupedTransactions }): JSX.Elemen
             </div>
             {sortOption}
             <div className="list-content">
-                {renderTransactions()}
+                {groupedData ? renderTransactions() : <div>Loading...</div>}
             </div>
         </div>
     );

@@ -1,10 +1,10 @@
-import { GroupedTransactions, FinancialData, Expense, Income } from "../types";
+import { GroupedTransactions, Transaction } from "../types";
 import { getWeekNumber } from "./utils.ts";
 
-function groupTransactionsByDate(data: FinancialData): GroupedTransactions {
+function groupTransactionsByDate(data: Transaction[]): GroupedTransactions {
     const grouped: GroupedTransactions | any = {};
 
-    const addTransaction = (transaction: Expense | Income) => {
+    const addTransaction = (transaction: Transaction) => {
         const date = new Date(transaction.date);
         const year = date.getFullYear().toString();
         const month = (date.getMonth() + 1).toString().padStart(2, '0');
@@ -31,10 +31,7 @@ function groupTransactionsByDate(data: FinancialData): GroupedTransactions {
         }
     };
 
-    data.income.forEach(addTransaction);
-    data.expenses.forEach(addTransaction);
-
-    // console.log(grouped);
+    data.forEach(addTransaction);
 
     return grouped;
 }

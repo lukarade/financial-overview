@@ -67,4 +67,4 @@ type OverviewData = {
 }
 
 
-export { CalendarDayType, FinancialData, Expense, Income, GroupedTransactions, DayTransactions, WeekTransactions, MonthTransactions, YearTransactions, OverviewData };
+export { CalendarDayType, FinancialData, Transaction, Expense, Income, GroupedTransactions, DayTransactions, WeekTransactions, MonthTransactions, YearTransactions, OverviewData };

@@ -26,7 +26,7 @@ Start Date: 2024-30-11
 - [ ] Add a button to delete an event from the calendar.
 
 ### Improvements
-- [ ] If the last displayed week row clomplety is of the next month, display the last week row of the previous month on top of the calendar instead (See September 2025 for an example). 
+- [x] If the last displayed week row clomplety is of the next month, display the last week row of the previous month on top of the calendar instead (See September 2025 for an example). (2024-10-12)
 
 ## Transaction Component
 - [x] Create a transaction component that displays the details of an event. (2024-09-12)
@@ -44,6 +44,8 @@ Start Date: 2024-30-11
   - [x] year: by month (2024-04-12)
   - [ ] month: by week
   - [ ] week: by day
+
+- [ ] Empty months/weeks/days should be displayed as well.
 
 - [ ] Create a pie chart that displays the percentage of income and expenses for the current month.
 - [ ] Add a button to navigate to the next month.
@@ -82,7 +84,7 @@ Start Date: 2024-30-11
    
 
 ## General
-
+- [x] Fetch the data from a backend server. (2024-10-12)
 - [ ] Add option to change the currency.
 - [ ] Add option to change the language.
 - [ ] Add option to change the theme.
