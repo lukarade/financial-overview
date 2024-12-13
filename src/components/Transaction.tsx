@@ -9,8 +9,8 @@ function Transaction({ transaction }) {
     };
 
     return (
-        <div className="transaction" style={styles}>
-            <h3>{transaction.name}</h3>
+        <div className="transaction" style={styles} onClick={() => alert('Clicked')}>
+            <h3>{transaction.title}</h3>
             <p>{transaction.amount}</p>
             <p>{transaction.category}</p>
         </div>

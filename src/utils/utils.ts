@@ -1,4 +1,4 @@
-import { Transaction } from "../types";
+import { DayTransactions, TransactionType } from "../types";
 
 function getWeekNumber(date: Date): number {
     const tempDate = new Date(date.getTime());
@@ -8,7 +8,7 @@ function getWeekNumber(date: Date): number {
     return 1 + Math.round(((tempDate.getTime() - week1.getTime()) / 86400000 - 3 + ((week1.getDay() + 6) % 7)) / 7);
 }
 
-function getDataForSelectedDay(selectedDay: Date, groupedData: any): Transaction[] {
+function getDataForSelectedDay(selectedDay: Date, groupedData: any): DayTransactions | null {
     const selectedYearString = selectedDay.getFullYear();
     const selectedMonthString = (selectedDay.getMonth() + 1).toString().padStart(2, "0");
     const selectedWeekString = getWeekNumber(selectedDay).toString().padStart(2, "0");
@@ -19,11 +19,11 @@ function getDataForSelectedDay(selectedDay: Date, groupedData: any): Transaction
         groupedData[selectedYearString][selectedMonthString] &&
         groupedData[selectedYearString][selectedMonthString][selectedWeekString] &&
         groupedData[selectedYearString][selectedMonthString][selectedWeekString][selectedDayString]
-    ) ? groupedData[selectedYearString][selectedMonthString][selectedWeekString][selectedDayString] : [];
+    ) ? groupedData[selectedYearString][selectedMonthString][selectedWeekString][selectedDayString] : null;
 }
 
 
-async function fetchUserData(url: string): Promise<{ data: Transaction[] | null, error: string | null }> {
+async function fetchUserData(url: string): Promise<{ data: TransactionType[] | null, error: string | null }> {
     try {
         const response = await fetch(url);
         if (!response.ok) {
@@ -35,4 +35,23 @@ async function fetchUserData(url: string): Promise<{ data: Transaction[] | null,
         return { data: null, error: error.message };
     }
 }
-export { getWeekNumber, getDataForSelectedDay, fetchUserData };
+
+async function postTransaction(url: string, transaction: TransactionType): Promise<void> {
+    try {
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(transaction),
+        });
+        if (!response.ok) {
+            throw new Error(response.statusText);
+        }
+    } catch (e: any) {
+        throw new Error(e.message);
+    }
+}
+
+
+export { getWeekNumber, getDataForSelectedDay, fetchUserData, postTransaction };

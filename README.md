@@ -22,7 +22,7 @@ Start Date: 2024-30-11
 - [ ] Double click on a day to add an expense / income.
 - [ ] Open a modal when a day is double clicked.
 - [ ] Add a button to close the modal.
-- [ ] Add a form to add a new event to the calendar.
+- [x] Add a form to add a new event to the calendar. (2024-13-12)
 - [ ] Add a button to delete an event from the calendar.
 
 ### Improvements

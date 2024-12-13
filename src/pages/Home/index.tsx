@@ -2,13 +2,12 @@ import React, { CSSProperties, useEffect, useState } from "react";
 import Calendar from "../../components/Calendar/Calender.tsx";
 import List from "../../components/List/List.tsx";
 
-import { exampleData } from "../../data/exampleData.ts";
 import Overview from "../../components/Overview/Overview.tsx";
 import { groupTransactionsByDate } from "../../utils/listUtils.ts";
 import TransactionList from "../../components/TransactionList.tsx";
-import { fetchUserData, getDataForSelectedDay } from "../../utils/utils.ts";
+import { fetchUserData, postTransaction, getDataForSelectedDay } from "../../utils/utils.ts";
 import { url } from "../../data/constances.ts";
-import { GroupedTransactions, Transaction } from "../../types.ts";
+import { TransactionType } from "../../types.ts";
 
 // TODO: Clean up the styles when the layout is finalized
 
@@ -69,8 +68,13 @@ const overviewStyle: CSSProperties = {
     outline: "3px solid orange",
 };
 
+interface OverviewViewProps {
+    transactionData: TransactionType[],
+    setTransactionData: (transactionData: TransactionType[]) => void,
+}
 
-function OverviewView({ transactionData }: { transactionData: Transaction[] }) {
+
+function OverviewView({ transactionData, setTransactionData }: OverviewViewProps) {
     const [viewMode, setViewMode] = useState<"calendar" | "list">("calendar");
     const [currentSelectedDay, updateDisplayedDay] = useState(new Date());
     const groupedData = groupTransactionsByDate(transactionData);
@@ -82,7 +86,7 @@ function OverviewView({ transactionData }: { transactionData: Transaction[] }) {
 
     return (
         <div style={overviewViewStyle}>
-            <TransactionList data={dataForSelectedDay} currentSelectedDay={currentSelectedDay} />
+            <TransactionList data={dataForSelectedDay} currentSelectedDay={currentSelectedDay} transactionData={transactionData} setTransactionData={setTransactionData} />
             <div style={{ ...calendarFrameStyle, ...overviewComponentStyle }}>
                 <button onClick={toggleViewMode}>
                     Switch to {viewMode === "calendar" ? "List View" : "Calendar View"}
@@ -117,7 +121,7 @@ function FlowView() {
 
 
 function Home() {
-    const [transactionData, setTransactionData] = useState<Transaction[]>([]);
+    const [transactionData, setTransactionData] = useState<TransactionType[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
 
@@ -138,13 +142,31 @@ function Home() {
         return <div>Error: {error}</div>;
     }
 
+    // Post data to the server
+    function handleAddTransaction(transaction: TransactionType): void {
+        postTransaction(url, transaction);
+        setTransactionData([...transactionData, transaction]);
+    }
+
+    const TestTransaction = {
+        id: "1",
+        title: "Test Transaction",
+        amount: 100,
+        date: "2025-01-01",
+        category: "Test Category",
+        type: "Expense",
+    };
+
     return (
         <div className="prevent-select">
             <Header />
             <Navigation />
-            {loading ? <div>Loading Data...</div> : transactionData.length > 0 && <OverviewView transactionData={transactionData} />}
+            {loading ? <div>Loading Data...</div> : transactionData.length > 0 && <OverviewView transactionData={transactionData} setTransactionData={setTransactionData} />}
             {/* <FlowView /> */}
             {/* <Footer /> */}
+
+            <button onClick={() => handleAddTransaction(TestTransaction)}>Add Example Data</button>
+
         </div>
     );
 }

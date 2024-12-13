@@ -1,10 +1,10 @@
-import { GroupedTransactions, Transaction } from "../types";
+import { GroupedTransactions, TransactionType } from "../types";
 import { getWeekNumber } from "./utils.ts";
 
-function groupTransactionsByDate(data: Transaction[]): GroupedTransactions {
+function groupTransactionsByDate(data: TransactionType[]): GroupedTransactions {
     const grouped: GroupedTransactions | any = {};
 
-    const addTransaction = (transaction: Transaction) => {
+    const addTransaction = (transaction: TransactionType) => {
         const date = new Date(transaction.date);
         const year = date.getFullYear().toString();
         const month = (date.getMonth() + 1).toString().padStart(2, '0');

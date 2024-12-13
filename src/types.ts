@@ -14,19 +14,19 @@ interface FinancialData {
     income: Income[];
 }
 
-interface Transaction {
+interface TransactionType {
     id: string;
-    name: string;
+    title: string;
     amount: number;
     date: string;
     category?: string;
     type?: string;
 }
 
-interface Expense extends Transaction {
+interface Expense extends TransactionType {
 }
 
-interface Income extends Transaction {
+interface Income extends TransactionType {
 }
 interface DayTransactions {
     transactions: (Expense | Income)[];
@@ -67,4 +67,4 @@ type OverviewData = {
 }
 
 
-export { CalendarDayType, FinancialData, Transaction, Expense, Income, GroupedTransactions, DayTransactions, WeekTransactions, MonthTransactions, YearTransactions, OverviewData };
+export { CalendarDayType, FinancialData, TransactionType, Expense, Income, GroupedTransactions, DayTransactions, WeekTransactions, MonthTransactions, YearTransactions, OverviewData };

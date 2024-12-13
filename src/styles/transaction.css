@@ -2,6 +2,7 @@
     outline: 1px solid pink;
     min-width: 20%;
     max-width: 20%;
+    position: relative;
 }
 
 .transaction {
@@ -18,4 +19,18 @@
 
 .transaction > p {
     margin: 5px;
+}
+
+.add-transaction {
+    position: absolute;
+    bottom: 0;
+    min-width: 80%;
+}
+
+.add-transaction-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: left;
+    width: 100%;
 }
