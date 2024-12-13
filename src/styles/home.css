@@ -1,0 +1,54 @@
+.header {
+    /* outline: 3px solid black; */
+    min-height: 10vh;
+}
+
+.total-overview-view {
+    outline: 3px solid green;
+    position: relative;
+    height: 80vh;
+    display: flex;
+}
+
+.flowview {
+    outline: 3px solid red;
+    min-height: 50vh;
+}
+
+.footer {
+    outline: 3px solid blue;
+    min-height: 5vh;
+    display: flex;
+    ;
+}
+
+.overview {
+    outline: 3px solid orange;
+    width: 30%;
+}
+
+.overview-component {
+    flex: 1;
+    padding: 1rem;
+    flex-grow: 1;
+}
+
+.calendar-frame {
+    outline: 3px solid yellow;
+}
+
+.transaction-menu {
+    position: relative;
+    height: 100%;
+    border-right: 1px solid #a6a6a6;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    transition: width 0.5s ease, overflow 0.5s ease;
+    width: 0; /* Initially hidden */
+    overflow: hidden; /* Hide content when collapsed */
+}
+
+.transaction-menu.open {
+    width: 25%; /* Slide in */
+    overflow: visible; 
+}
+

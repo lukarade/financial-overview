@@ -1,72 +1,37 @@
-import React, { CSSProperties, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Calendar from "../../components/Calendar/Calender.tsx";
 import List from "../../components/List/List.tsx";
 
+import "../../styles/home.css";
 import Overview from "../../components/Overview/Overview.tsx";
 import { groupTransactionsByDate } from "../../utils/listUtils.ts";
 import TransactionList from "../../components/TransactionList.tsx";
-import { fetchUserData, postTransaction, getDataForSelectedDay } from "../../utils/utils.ts";
+import { fetchUserData, getDataForSelectedDay } from "../../utils/utils.ts";
 import { url } from "../../data/constances.ts";
 import { TransactionType } from "../../types.ts";
 
 // TODO: Clean up the styles when the layout is finalized
 
-const headerStyle: CSSProperties = {
-    outline: "3px solid black",
-};
-
-const navigationStyle: CSSProperties = {
-    outline: "3px solid red",
-};
-
-const footerStyle: CSSProperties = {
-    outline: "3px solid blue",
-};
 
 function Header() {
     return (
-        <div style={headerStyle}>
+        <div className="header">
             <h2>Header</h2>
         </div>
     );
 }
 
-function Navigation() {
-    return (
-        <div style={navigationStyle}>
-            <h2>Navigation</h2>
-        </div>
-    );
-}
 
 function Footer() {
     return (
-        <div style={footerStyle}>
-            <h2>Footer</h2>
+        <div className="footer">
+            <p>Financial Overview </p>
+            <p>©Lukas Radermacher (2024)</p>
+            <a href="https://github.com/lukarade/financial-overview">View on Github</a>
         </div>
     );
 }
 
-
-const overviewViewStyle: CSSProperties = {
-    outline: "3px solid green",
-    display: "flex",
-    height: "70vh",
-};
-
-const overviewComponentStyle: CSSProperties = {
-    flex: 1,
-    padding: "1rem",
-
-}
-
-const calendarFrameStyle: CSSProperties = {
-    outline: "3px solid yellow",
-};
-
-const overviewStyle: CSSProperties = {
-    outline: "3px solid orange",
-};
 
 interface OverviewViewProps {
     transactionData: TransactionType[],
@@ -77,6 +42,8 @@ interface OverviewViewProps {
 function OverviewView({ transactionData, setTransactionData }: OverviewViewProps) {
     const [viewMode, setViewMode] = useState<"calendar" | "list">("calendar");
     const [currentSelectedDay, updateDisplayedDay] = useState(new Date());
+    const [showModal, setShowModal] = useState(false);
+    const [isTransactionMenuOpen, setTransactionMenuOpen] = useState(true);
     const groupedData = groupTransactionsByDate(transactionData);
     const dataForSelectedDay = getDataForSelectedDay(currentSelectedDay, groupedData);
 
@@ -85,12 +52,22 @@ function OverviewView({ transactionData, setTransactionData }: OverviewViewProps
     };
 
     return (
-        <div style={overviewViewStyle}>
-            <TransactionList data={dataForSelectedDay} currentSelectedDay={currentSelectedDay} transactionData={transactionData} setTransactionData={setTransactionData} />
-            <div style={{ ...calendarFrameStyle, ...overviewComponentStyle }}>
+        <div className="total-overview-view">
+            <div className={"transaction-menu" + (isTransactionMenuOpen ? " open" : "")}>
+                <TransactionList
+                    data={dataForSelectedDay}
+                    currentSelectedDay={currentSelectedDay}
+                    transactionData={transactionData}
+                    setTransactionData={setTransactionData} />
+            </div>
+            <button
+                className="toggle-menu-button"
+                onClick={() => setTransactionMenuOpen(!isTransactionMenuOpen)}>{isTransactionMenuOpen ? "<<" : ">>"}</button>
+            <div className={`calendar-frame overview-component`}>
                 <button onClick={toggleViewMode}>
                     Switch to {viewMode === "calendar" ? "List View" : "Calendar View"}
                 </button>
+                <button onClick={() => setShowModal(!showModal)}>Test</button>
                 {viewMode === "calendar" ? (
                     (groupedData &&
                         <Calendar groupedData={groupedData} currentSelectedDay={currentSelectedDay} updateDisplayedDay={updateDisplayedDay} />
@@ -99,7 +76,7 @@ function OverviewView({ transactionData, setTransactionData }: OverviewViewProps
                     <List groupedData={groupedData} />
                 )}
             </div>
-            <div style={{ ...overviewStyle, ...overviewComponentStyle }}>
+            <div className={`overview overview-component`} >
                 <h3>Overview</h3>
                 <Overview groupedData={groupedData} />
             </div>
@@ -107,13 +84,10 @@ function OverviewView({ transactionData, setTransactionData }: OverviewViewProps
     );
 }
 
-const flowStyle = {
-    outline: "3px solid purple",
-};
 
 function FlowView() {
     return (
-        <div style={flowStyle}>
+        <div className="flowview">
             <h2>FlowView</h2>
         </div>
     );
@@ -142,31 +116,12 @@ function Home() {
         return <div>Error: {error}</div>;
     }
 
-    // Post data to the server
-    function handleAddTransaction(transaction: TransactionType): void {
-        postTransaction(url, transaction);
-        setTransactionData([...transactionData, transaction]);
-    }
-
-    const TestTransaction = {
-        id: "1",
-        title: "Test Transaction",
-        amount: 100,
-        date: "2025-01-01",
-        category: "Test Category",
-        type: "Expense",
-    };
-
     return (
         <div className="prevent-select">
             <Header />
-            <Navigation />
             {loading ? <div>Loading Data...</div> : transactionData.length > 0 && <OverviewView transactionData={transactionData} setTransactionData={setTransactionData} />}
-            {/* <FlowView /> */}
-            {/* <Footer /> */}
-
-            <button onClick={() => handleAddTransaction(TestTransaction)}>Add Example Data</button>
-
+            <FlowView />
+            <Footer />
         </div>
     );
 }

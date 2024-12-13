@@ -1,8 +1,21 @@
 .transaction-view {
     outline: 1px solid pink;
-    min-width: 20%;
-    max-width: 20%;
     position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.transaction-list {
+    overflow-y: auto;
+    flex-grow: 1;
+    scrollbar-width: none;
+    --ms-overflow-style: none;
+}
+
+.transaction-list::-webkit-scrollbar {
+    display: none;
 }
 
 .transaction {
@@ -22,9 +35,7 @@
 }
 
 .add-transaction {
-    position: absolute;
-    bottom: 0;
-    min-width: 80%;
+    position: relative;
 }
 
 .add-transaction-form {
@@ -33,4 +44,14 @@
     justify-content: center;
     align-items: left;
     width: 100%;
+}
+
+.add-transaction-form input.error {
+    border-color: red;
+}
+
+.add-transaction-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
 }

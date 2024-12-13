@@ -1,60 +1,98 @@
-import React from "react";
+import React, { useState } from "react";
 import { TransactionType } from "../types";
 
 import { postTransaction } from "../utils/utils.ts";
 import { url } from "../data/constances.ts";
 
-
 interface AddTransactionFormProps {
-    transactionData: TransactionType[],
-    setTransactionData: (data: TransactionType[]) => void
+    transactionData: TransactionType[];
+    setTransactionData: (transactionData: TransactionType[]) => void;
 }
 
 function AddTransactionForm({ transactionData, setTransactionData }: AddTransactionFormProps): JSX.Element {
-    function handleAddTransaction(event) {
+    const [title, setTitle] = useState('');
+    const [amount, setAmount] = useState('');
+    const [date, setDate] = useState(new Date().toISOString().split('T')[0]);
+    const [category, setCategory] = useState('');
+    const [errors, setErrors] = useState<{ title?: boolean; amount?: boolean; date?: boolean }>({});
+
+    function validateForm(): boolean {
+        const newErrors: { title?: boolean; amount?: boolean; date?: boolean } = {};
+        if (!title) newErrors.title = true;
+        if (!amount || isNaN(Number(amount))) newErrors.amount = true;
+        if (!date) newErrors.date = true;
+        setErrors(newErrors);
+        return Object.keys(newErrors).length === 0;
+    };
+
+    function handleAddTransaction(event: React.FormEvent<HTMLFormElement>): void {
         event.preventDefault();
-        const form = event.target;
-        const formData = new FormData(form);
-        const formJson = Object.fromEntries(formData.entries());
-        const transaction = buildTransactionFromForm(formJson);
+        if (!validateForm()) return;
 
-        form.reset();
-
-        postTransaction(url, transaction);
-        setTransactionData([...transactionData, transaction]);
-    }
-
-
-    function buildTransactionFromForm(formJson): TransactionType {
-        const transaction = {
-            id: Math.random().toString(36).substr(2, 9),  //TODO: Find a good way to generate a unique id for the transactions
-            title: formJson.titleInput,
-            amount: Number(formJson.amountInput),
-            date: formJson.dateInput,
-            category: formJson.categoryInput,
+        const transaction: TransactionType = {
+            id: `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
+            title,
+            amount: Number(amount),
+            date,
+            category,
         };
 
-        return transaction;
-    }
+        setTransactionData([...transactionData, transaction]);
+        postTransaction(url, transaction);
+        setTitle('');
+        setAmount('');
+        setDate('');
+        setCategory('');
+        setErrors({});
+    };
 
     return (
-        <form className="add-transaction-form" method="post" onSubmit={handleAddTransaction}>
+        <form className="add-transaction-form" onSubmit={handleAddTransaction}>
             <label>
-                <input type="text" name="titleInput" placeholder="Title" />
+                <input
+                    type="text"
+                    name="titleInput"
+                    value={title}
+                    onChange={(e) => setTitle(e.target.value)}
+                    placeholder="Title"
+                    className={errors.title ? 'error' : ''}
+                />
             </label>
             <label>
-                <input type="number" name="amountInput" placeholder="Amount" />
+                <input
+                    type="number"
+                    name="amountInput"
+                    value={amount}
+                    onChange={(e) => setAmount(e.target.value)}
+                    placeholder="Amount"
+                    className={errors.amount ? 'error' : ''}
+                />
             </label>
             <label>
-                <input type="date" name="dateInput" />
+                <input
+                    type="date"
+                    name="dateInput"
+                    value={date}
+                    onChange={(e) => setDate(e.target.value)}
+                    className={errors.date ? 'error' : ''}
+                />
             </label>
             <label>
-                <input type="text" name="categoryInput" placeholder="Category" />
+                <input
+                    type="text"
+                    name="categoryInput"
+                    value={category}
+                    onChange={(e) => setCategory(e.target.value)}
+                    placeholder="Category (Optional)"
+                />
             </label>
-            <button type="reset">Clear</button>
-            <button type="submit">Add</button>
+            <div className="add-transaction-buttons">
+
+                <button type="reset"> Clear</button>
+                <button type="submit">Add Transaction</button>
+            </div>
         </form>
     );
-}
+};
 
 export default AddTransactionForm;

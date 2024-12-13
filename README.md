@@ -91,3 +91,13 @@ Start Date: 2024-30-11
 
 ## Bugs 
 - [ ] Fix the sorting of the events in the list component. The events are not sorted by date correctly. 
+
+
+
+### Fancy Improvements
+#### TransactionForm
+-  [ ] The Add Transaction Form in the Transaction View should only be visible when the user is hovering over the Button. Otherwise, it should be hidden and olny a little + should be visible.
+-  [ ] The Add Transaction Form should be animated when it appears.
+-  [ ] The Add Transaction Form should be animated when it disappears.
+-  [ ] The Add Transaction Form should be animated when it is submitted (swift up and append to the list).
+-  [ ] If the user has startet putting text into the form it should not disappear when the mouse leaves the button. Instead, it should stay visible until the user clicks the submit button or the cancel button. Otherwise, it should disappear when the mouse leaves the button.

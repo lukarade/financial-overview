@@ -20,12 +20,14 @@ function TransactionList({ data, currentSelectedDay, transactionData, setTransac
             <div className="current-day">
                 {currentSelectedDay.getDate()} {months[currentSelectedDay.getMonth()]} {currentSelectedDay.getFullYear()}
             </div>
-            {data && data.transactions && data.transactions.map((transaction, index) => {
-                return (
-                    <Transaction key={index} transaction={transaction} />
-                );
-            }
-            )}
+            <div className="transaction-list">
+                {data && data.transactions && data.transactions.map((transaction, index) => {
+                    return (
+                        <Transaction key={index} transaction={transaction} />
+                    );
+                }
+                )}
+            </div>
             <div className="add-transaction transaction">
                 <p>Add transaction</p>
                 <AddTransactionForm transactionData={transactionData} setTransactionData={setTransactionData} />
