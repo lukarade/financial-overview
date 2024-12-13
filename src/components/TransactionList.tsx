@@ -9,7 +9,7 @@ interface TransactionListProps {
     data: DayTransactions | null,
     currentSelectedDay: Date
     transactionData: TransactionType[]
-    setTransactionData: (data: TransactionType[]) => void
+    setTransactionData: React.Dispatch<React.SetStateAction<TransactionType[]>>
 }
 
 function TransactionList({ data, currentSelectedDay, transactionData, setTransactionData }: TransactionListProps): JSX.Element {
@@ -23,7 +23,7 @@ function TransactionList({ data, currentSelectedDay, transactionData, setTransac
             <div className="transaction-list">
                 {data && data.transactions && data.transactions.map((transaction, index) => {
                     return (
-                        <Transaction key={index} transaction={transaction} />
+                        <Transaction key={index} transaction={transaction} setTransactionData={setTransactionData} />
                     );
                 }
                 )}

@@ -53,5 +53,18 @@ async function postTransaction(url: string, transaction: TransactionType): Promi
     }
 }
 
+async function deleteTransaction(url: string, transactionId: string): Promise<void> {
+    try {
+        const response = await fetch(`${url}/${transactionId}`, {
+            method: 'DELETE',
+        });
+        if (!response.ok) {
+            throw new Error(response.statusText);
+        }
+    } catch (e: any) {
+        throw new Error(e.message);
+    }
+}
 
-export { getWeekNumber, getDataForSelectedDay, fetchUserData, postTransaction };
+
+export { getWeekNumber, getDataForSelectedDay, fetchUserData, postTransaction, deleteTransaction };

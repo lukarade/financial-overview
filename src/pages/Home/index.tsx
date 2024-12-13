@@ -35,7 +35,7 @@ function Footer() {
 
 interface OverviewViewProps {
     transactionData: TransactionType[],
-    setTransactionData: (transactionData: TransactionType[]) => void,
+    setTransactionData: React.Dispatch<React.SetStateAction<TransactionType[]>>;
 }
 
 
