@@ -15,11 +15,11 @@ function getDataForSelectedDay(selectedDay: Date, groupedData: any): DayTransact
     const selectedDayString = selectedDay.getDate().toString().padStart(2, "0");
 
     return (
-        groupedData[selectedYearString] &&
-        groupedData[selectedYearString].transactions[selectedMonthString] &&
-        groupedData[selectedYearString].transactions[selectedMonthString].transactions[selectedWeekString] &&
-        groupedData[selectedYearString].transactions[selectedMonthString].transactions[selectedWeekString].transactions[selectedDayString]
-    ) ? groupedData[selectedYearString].transactions[selectedMonthString].transactions[selectedWeekString].transactions[selectedDayString] : null;
+        groupedData.transactions[selectedYearString] &&
+        groupedData.transactions[selectedYearString].transactions[selectedMonthString] &&
+        groupedData.transactions[selectedYearString].transactions[selectedMonthString].transactions[selectedWeekString] &&
+        groupedData.transactions[selectedYearString].transactions[selectedMonthString].transactions[selectedWeekString].transactions[selectedDayString]
+    ) ? groupedData.transactions[selectedYearString].transactions[selectedMonthString].transactions[selectedWeekString].transactions[selectedDayString] : null;
 }
 
 

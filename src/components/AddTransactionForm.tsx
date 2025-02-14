@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { TransactionType } from "../types";
 
 import { postTransaction } from "../utils/utils.ts";
@@ -17,8 +17,13 @@ function AddTransactionForm({ transactionData, setTransactionData, currentSelect
     const [category, setCategory] = useState('');
     const [errors, setErrors] = useState<{ title?: boolean; amount?: boolean; date?: boolean }>({});
 
-    const currentSelectedDayCorrected = new Date(currentSelectedDay);
-    currentSelectedDayCorrected.setMinutes(currentSelectedDay.getMinutes() - currentSelectedDay.getTimezoneOffset());
+    useEffect(() => {
+        // This is a workaround to fix the timezone issue
+        const currentSelectedDayCorrected = new Date(currentSelectedDay);
+        currentSelectedDayCorrected.setMinutes(currentSelectedDay.getMinutes() - currentSelectedDay.getTimezoneOffset());
+
+        setDate(currentSelectedDayCorrected.toISOString().split('T')[0]);
+    }, [currentSelectedDay]);
 
     function validateForm(): boolean {
         const newErrors: { title?: boolean; amount?: boolean; date?: boolean } = {};
@@ -76,7 +81,7 @@ function AddTransactionForm({ transactionData, setTransactionData, currentSelect
                 <input
                     type="date"
                     name="dateInput"
-                    value={currentSelectedDayCorrected ? currentSelectedDayCorrected.toISOString().split("T")[0] : date}
+                    value={date}
                     onChange={(e) => setDate(e.target.value)}
                     className={errors.date ? 'error' : ''}
                 />

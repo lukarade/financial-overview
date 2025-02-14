@@ -39,7 +39,8 @@ enum Period {
 
 enum ChartType {
     BAR = "bar",
-    LINE = "line"
+    LINE = "line",
+    PIE = "pie"
 }
 
 // Contains all transactions for a specific period as well as the total income and expenses for that period
@@ -55,19 +56,19 @@ interface DayTransactions extends TransactionGroup<TransactionType[]> {
 }
 
 interface WeekTransactions extends TransactionGroup<{ [day: string]: DayTransactions }> {
-    transactions: { [day: string]: DayTransactions };
+    transactions: Record<string, DayTransactions>;
 }
 
 interface MonthTransactions extends TransactionGroup<{ [week: string]: WeekTransactions }> {
-    transactions: { [week: string]: WeekTransactions };
+    transactions: Record<string, WeekTransactions>;
 }
 
 interface YearTransactions extends TransactionGroup<{ [month: string]: MonthTransactions }> {
-    transactions: { [month: string]: MonthTransactions };
+    transactions: Record<string, MonthTransactions>;
 }
 
 interface GroupedTransactions {
-    [year: string]: YearTransactions;
+    transactions: Record<string, YearTransactions>;
 }
 
 type OverviewOptionsType = {

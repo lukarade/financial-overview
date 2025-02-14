@@ -10,7 +10,7 @@ function groupTransactionsByDate(data: TransactionType[]): GroupedTransactions {
      * @returns {GroupedTransactions} - the grouped transactions
      */
 
-    const grouped: GroupedTransactions = {};
+    const grouped: GroupedTransactions = { transactions: {} as Record<string, YearTransactions> };
 
     function addTransaction(transaction: TransactionType): void {
         /**
@@ -46,30 +46,30 @@ function groupTransactionsByDate(data: TransactionType[]): GroupedTransactions {
                 period,
                 totalExpense: 0,
                 totalIncome: 0,
-                transactions: {},
+                transactions: {} as Record<string, T>,
             } as T;
         }
 
         // Initialize the year, month, week, and day if they do not exist
-        if (!grouped[year]) grouped[year] = initializePeriod<YearTransactions>(Period.YEAR);
-        if (!grouped[year].transactions[month]) grouped[year].transactions[month] = initializePeriod<MonthTransactions>(Period.MONTH);
-        if (!grouped[year].transactions[month].transactions[week]) grouped[year].transactions[month].transactions[week] = initializePeriod<WeekTransactions>(Period.WEEK);
-        if (!grouped[year].transactions[month].transactions[week].transactions[day]) grouped[year].transactions[month].transactions[week].transactions[day] = initializePeriod<DayTransactions>(Period.DAY);
+        if (!grouped.transactions[year]) grouped.transactions[year] = initializePeriod<YearTransactions>(Period.YEAR);
+        if (!grouped.transactions[year].transactions[month]) grouped.transactions[year].transactions[month] = initializePeriod<MonthTransactions>(Period.MONTH);
+        if (!grouped.transactions[year].transactions[month].transactions[week]) grouped.transactions[year].transactions[month].transactions[week] = initializePeriod<WeekTransactions>(Period.WEEK);
+        if (!grouped.transactions[year].transactions[month].transactions[week].transactions[day]) grouped.transactions[year].transactions[month].transactions[week].transactions[day] = initializePeriod<DayTransactions>(Period.DAY);
 
 
-        grouped[year].transactions[month].transactions[week].transactions[day].transactions.push(transaction);
+        grouped.transactions[year].transactions[month].transactions[week].transactions[day].transactions.push(transaction);
 
         // Transaction is an expense if the amount is negative
         if (transaction.amount < 0) {
-            grouped[year].totalExpense += transaction.amount;
-            grouped[year].transactions[month].totalExpense += transaction.amount;
-            grouped[year].transactions[month].transactions[week].totalExpense += transaction.amount;
-            grouped[year].transactions[month].transactions[week].transactions[day].totalExpense += transaction.amount;
+            grouped.transactions[year].totalExpense += transaction.amount;
+            grouped.transactions[year].transactions[month].totalExpense += transaction.amount;
+            grouped.transactions[year].transactions[month].transactions[week].totalExpense += transaction.amount;
+            grouped.transactions[year].transactions[month].transactions[week].transactions[day].totalExpense += transaction.amount;
         } else {  // Transaction is an income if the amount is positive
-            grouped[year].totalIncome += transaction.amount;
-            grouped[year].transactions[month].totalIncome += transaction.amount;
-            grouped[year].transactions[month].transactions[week].totalIncome += transaction.amount;
-            grouped[year].transactions[month].transactions[week].transactions[day].totalIncome += transaction.amount;
+            grouped.transactions[year].totalIncome += transaction.amount;
+            grouped.transactions[year].transactions[month].totalIncome += transaction.amount;
+            grouped.transactions[year].transactions[month].transactions[week].totalIncome += transaction.amount;
+            grouped.transactions[year].transactions[month].transactions[week].transactions[day].totalIncome += transaction.amount;
         }
     };
 

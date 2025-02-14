@@ -74,7 +74,7 @@ function generateDays(currentSelectedDay: Date, monthTransactions: MonthTransact
 };
 
 function getMonthTransactions(year: number, month: number, groupedData: GroupedTransactions): MonthTransactions | null {
-    const yearTransactions = groupedData[year];
+    const yearTransactions = groupedData.transactions[year];
     // console.log("YEAR", yearTransactions);
     if (!yearTransactions) {
         return null;
