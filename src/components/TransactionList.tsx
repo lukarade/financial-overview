@@ -13,7 +13,6 @@ interface TransactionListProps {
 }
 
 function TransactionList({ data, currentSelectedDay, transactionData, setTransactionData }: TransactionListProps): JSX.Element {
-
     return (
         <div className="transaction-view">
             <h3>Transaction View</h3>
@@ -30,7 +29,7 @@ function TransactionList({ data, currentSelectedDay, transactionData, setTransac
             </div>
             <div className="add-transaction transaction">
                 <p>Add transaction</p>
-                <AddTransactionForm transactionData={transactionData} setTransactionData={setTransactionData} />
+                <AddTransactionForm transactionData={transactionData} setTransactionData={setTransactionData} currentSelectedDay={currentSelectedDay} />
 
             </div>
         </div>

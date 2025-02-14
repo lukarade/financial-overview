@@ -44,6 +44,7 @@ function OverviewView({ transactionData, setTransactionData }: OverviewViewProps
     const [currentSelectedDay, updateDisplayedDay] = useState(new Date());
     const [showModal, setShowModal] = useState(false);
     const [isTransactionMenuOpen, setTransactionMenuOpen] = useState(true);
+
     const groupedData = groupTransactionsByDate(transactionData);
     const dataForSelectedDay = getDataForSelectedDay(currentSelectedDay, groupedData);
 

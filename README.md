@@ -24,6 +24,7 @@ Start Date: 2024-30-11
 - [ ] Add a button to close the modal.
 - [x] Add a form to add a new event to the calendar. (2024-13-12)
 - [x] Add a button to delete an event from the calendar. (2024-13-12)
+- [ ] Click on the current day to jump to today, instead of today button
 
 ### Improvements
 - [x] If the last displayed week row clomplety is of the next month, display the last week row of the previous month on top of the calendar instead (See September 2025 for an example). (2024-10-12)

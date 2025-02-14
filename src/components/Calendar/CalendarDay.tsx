@@ -14,16 +14,16 @@ function CalendarDayComponent({ calendarDay, onDayClick }: CalendarDayProps): JS
         onDayClick(calendarDay.date);
     }
 
-    const handleDoubleClick = () => {
-        alert('Double Clicked');
-    }
+    // const handleDoubleClick = () => {
+    //     alert('Double Clicked');
+    // }
 
     return (
         <div className={"calendar-day" + (calendarDay.currentMonth ? " current" : "") + (calendarDay.selected ? " selected" : "")}
             role="button"
             aria-pressed="false"
             onClick={handleClick}
-            onDoubleClick={handleDoubleClick}
+        // onDoubleClick={handleDoubleClick}
         >
             <p>{calendarDay.day}</p>
             {calendarDay.data && <CalendarTransaction> + </CalendarTransaction>}

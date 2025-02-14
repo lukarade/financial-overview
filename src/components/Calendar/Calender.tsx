@@ -2,9 +2,10 @@ import React from "react";
 import CalendarBody from "./CalendarBody.tsx";
 import "../../styles/calendar.css";
 import CalendarNavigation from "./CalendarNavigation.tsx";
+import { GroupedTransactions } from "../../types.ts";
 
 interface CalendarProps {
-    groupedData: any;
+    groupedData: GroupedTransactions;
     currentSelectedDay: Date;
     updateDisplayedDay: (day: Date) => void;
 }

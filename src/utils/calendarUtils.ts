@@ -1,4 +1,4 @@
-import { CalendarDayType, GroupedTransactions, MonthTransactions } from '../types';
+import { CalendarDayType, GroupedTransactions, MonthTransactions, TransactionType } from '../types.ts';
 import { getWeekNumber } from './utils.ts';
 
 function createCalendarDay(date: Date, currentSelectedDay: Date, monthTransactions: MonthTransactions | null): CalendarDayType {
@@ -8,7 +8,7 @@ function createCalendarDay(date: Date, currentSelectedDay: Date, monthTransactio
      * @param {any} monthTransactions - the transactions for the month
      */
 
-    const res = {
+    const res: CalendarDayType = {
         currentMonth: date.getMonth() === currentSelectedDay.getMonth(),
         date: new Date(date),
         day: date.getDate(),
@@ -18,7 +18,7 @@ function createCalendarDay(date: Date, currentSelectedDay: Date, monthTransactio
         selected: date.toDateString() === currentSelectedDay.toDateString(),
         data: getDayTransactions(monthTransactions, date),
     };
-
+    // console.log("RES", res);
     return res;
 }
 
@@ -75,11 +75,13 @@ function generateDays(currentSelectedDay: Date, monthTransactions: MonthTransact
 
 function getMonthTransactions(year: number, month: number, groupedData: GroupedTransactions): MonthTransactions | null {
     const yearTransactions = groupedData[year];
+    // console.log("YEAR", yearTransactions);
     if (!yearTransactions) {
         return null;
     }
 
-    const monthTransactions = yearTransactions[String(month).padStart(2, '0')];
+    const monthTransactions = yearTransactions.transactions[String(month).padStart(2, '0')];
+    // console.log("MONTH", monthTransactions);
     if (!monthTransactions) {
         return null;
     }
@@ -87,22 +89,23 @@ function getMonthTransactions(year: number, month: number, groupedData: GroupedT
     return monthTransactions;
 }
 
-function getDayTransactions(monthTransactions: MonthTransactions | null, date: Date): [] | null {
+function getDayTransactions(monthTransactions: MonthTransactions | null, date: Date): TransactionType[] | null {
     if (!monthTransactions) {
         return null;
     }
+    // console.log("DATE", monthTransactions);
 
     const weekString = String(getWeekNumber(date)).padStart(2, '0');
-    if (monthTransactions[weekString] === undefined) {
+    if (monthTransactions.transactions[weekString] === undefined) {
         return null;
     }
 
     const dayString = String(date.getDate()).padStart(2, '0');
-    if (monthTransactions[weekString][dayString] === undefined) {
+    if (monthTransactions.transactions[weekString].transactions[dayString] === undefined) {
         return null;
     }
-
-    return monthTransactions[weekString][dayString];
+    // console.log("DAY", monthTransactions.transactions[weekString].transactions[dayString].transactions);
+    return monthTransactions.transactions[weekString].transactions[dayString].transactions;
 }
 
 export { getWeekNumber, getMonthTransactions, generateDays };

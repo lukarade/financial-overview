@@ -1,4 +1,4 @@
-import { DayTransactions, TransactionType } from "../types";
+import { DayTransactions, TransactionType } from "../types.ts";
 
 function getWeekNumber(date: Date): number {
     const tempDate = new Date(date.getTime());
@@ -16,10 +16,10 @@ function getDataForSelectedDay(selectedDay: Date, groupedData: any): DayTransact
 
     return (
         groupedData[selectedYearString] &&
-        groupedData[selectedYearString][selectedMonthString] &&
-        groupedData[selectedYearString][selectedMonthString][selectedWeekString] &&
-        groupedData[selectedYearString][selectedMonthString][selectedWeekString][selectedDayString]
-    ) ? groupedData[selectedYearString][selectedMonthString][selectedWeekString][selectedDayString] : null;
+        groupedData[selectedYearString].transactions[selectedMonthString] &&
+        groupedData[selectedYearString].transactions[selectedMonthString].transactions[selectedWeekString] &&
+        groupedData[selectedYearString].transactions[selectedMonthString].transactions[selectedWeekString].transactions[selectedDayString]
+    ) ? groupedData[selectedYearString].transactions[selectedMonthString].transactions[selectedWeekString].transactions[selectedDayString] : null;
 }
 
 

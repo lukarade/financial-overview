@@ -7,14 +7,18 @@ import { url } from "../data/constances.ts";
 interface AddTransactionFormProps {
     transactionData: TransactionType[];
     setTransactionData: (transactionData: TransactionType[]) => void;
+    currentSelectedDay: Date;
 }
 
-function AddTransactionForm({ transactionData, setTransactionData }: AddTransactionFormProps): JSX.Element {
+function AddTransactionForm({ transactionData, setTransactionData, currentSelectedDay }: AddTransactionFormProps): JSX.Element {
     const [title, setTitle] = useState('');
     const [amount, setAmount] = useState('');
     const [date, setDate] = useState(new Date().toISOString().split('T')[0]);
     const [category, setCategory] = useState('');
     const [errors, setErrors] = useState<{ title?: boolean; amount?: boolean; date?: boolean }>({});
+
+    const currentSelectedDayCorrected = new Date(currentSelectedDay);
+    currentSelectedDayCorrected.setMinutes(currentSelectedDay.getMinutes() - currentSelectedDay.getTimezoneOffset());
 
     function validateForm(): boolean {
         const newErrors: { title?: boolean; amount?: boolean; date?: boolean } = {};
@@ -72,7 +76,7 @@ function AddTransactionForm({ transactionData, setTransactionData }: AddTransact
                 <input
                     type="date"
                     name="dateInput"
-                    value={date}
+                    value={currentSelectedDayCorrected ? currentSelectedDayCorrected.toISOString().split("T")[0] : date}
                     onChange={(e) => setDate(e.target.value)}
                     className={errors.date ? 'error' : ''}
                 />

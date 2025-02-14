@@ -6,7 +6,7 @@ interface CalendarDayType {
     month: number;
     year: number;
     selected: boolean;
-    data?: any; //TODO: Define the type
+    data?: TransactionType[] | null;
 }
 
 interface FinancialData {
@@ -28,43 +28,71 @@ interface Expense extends TransactionType {
 
 interface Income extends TransactionType {
 }
-interface DayTransactions {
-    transactions: (Expense | Income)[];
-    totalExpense: number;
-    totalIncome: number;
+
+// TODO: In the future Period could be of variable length that can be changed by the user
+enum Period {
+    YEAR = "year",
+    MONTH = "month",
+    WEEK = "week",
+    DAY = "day"
 }
 
-interface WeekTransactions {
-    day: DayTransactions;
-    totalExpense: number;
-    totalIncome: number;
+enum ChartType {
+    BAR = "bar",
+    LINE = "line"
 }
 
-interface MonthTransactions {
-    week: WeekTransactions;
+// Contains all transactions for a specific period as well as the total income and expenses for that period
+type TransactionGroup<T = TransactionType[]> = {
+    period: Period;
     totalExpense: number;
     totalIncome: number;
+    transactions: T;
 }
 
-interface YearTransactions {
-    month: MonthTransactions;
-    totalExpense: number;
-    totalIncome: number;
+interface DayTransactions extends TransactionGroup<TransactionType[]> {
+    transactions: TransactionType[];
+}
+
+interface WeekTransactions extends TransactionGroup<{ [day: string]: DayTransactions }> {
+    transactions: { [day: string]: DayTransactions };
+}
+
+interface MonthTransactions extends TransactionGroup<{ [week: string]: WeekTransactions }> {
+    transactions: { [week: string]: WeekTransactions };
+}
+
+interface YearTransactions extends TransactionGroup<{ [month: string]: MonthTransactions }> {
+    transactions: { [month: string]: MonthTransactions };
 }
 
 interface GroupedTransactions {
-    year: YearTransactions;
+    [year: string]: YearTransactions;
+}
+
+type OverviewOptionsType = {
+    chartType: ChartType;
+    overviewType: Period;
+    selectedYear?: string;
+    selectedMonth?: string;
+    selectedWeek?: string;
+    selectedDay?: string;
 }
 
 
-type OverviewData = {
-    months: {
-        year: string,
-        month: string,
-        totalExpense: number,
-        totalIncome: number,
-    }[];
-}
-
-
-export { CalendarDayType, FinancialData, TransactionType, Expense, Income, GroupedTransactions, DayTransactions, WeekTransactions, MonthTransactions, YearTransactions, OverviewData };
+export {
+    CalendarDayType,
+    FinancialData,
+    TransactionType,
+    Expense,
+    Income,
+    Period,
+    ChartType,
+    TransactionGroup,
+    GroupedTransactions,
+    DayTransactions,
+    WeekTransactions,
+    MonthTransactions,
+    YearTransactions,
+    OverviewOptionsType
+};
