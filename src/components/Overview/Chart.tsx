@@ -1,17 +1,24 @@
 import React from "react";
 import BarChart from "./BarChart.tsx";
-import { OverviewData } from "../../types.ts";
+import { ChartType, OverviewOptionsType, TransactionType, YearTransactions, MonthTransactions, DayTransactions, Period } from "../../types.ts";
 
-function Chart({ overviewData }: { overviewData: OverviewData }): JSX.Element {
+interface ChartProps {
+    overviewData: TransactionType[] | Record<string, YearTransactions | MonthTransactions | DayTransactions> | null;
+    overviewOptions: OverviewOptionsType;
+}
+
+function Chart({ overviewData, overviewOptions }: ChartProps): JSX.Element {
     const barHeight = 20;
-    const numBars = (overviewData.months.length - 1) * 2; // This only works for months
-    const chartHeight = numBars * barHeight * 1.5;
-    const chartWidth = 800;
+    const numBars = overviewOptions.overviewType === Period.YEAR ? (overviewData ? Object.keys(overviewData).length : 0) : (overviewOptions.overviewType === Period.MONTH ? 12 : 31);
+    const chartHeight = 2 * numBars * barHeight > 482 ? 2 * numBars * barHeight : 482;
+    const chartWidth = 400;
 
     return (
         <svg width={chartWidth} height={chartHeight} style={{ border: "1px solid black" }}>
             <g className="container">
-                <BarChart overviewData={overviewData} chartWidth={chartWidth} />
+                {overviewOptions.chartType === ChartType.BAR ? <BarChart overviewData={overviewData} chartWidth={chartWidth} barHeight={barHeight} /> :
+                    // overviewOptions.chartType === ChartType.LINE ? <LineChart overviewData={overviewData} chartWidth={chartWidth} /> : 
+                    null}
             </g>
         </svg>
     );

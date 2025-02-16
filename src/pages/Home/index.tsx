@@ -68,7 +68,7 @@ function OverviewView({ transactionData, setTransactionData }: OverviewViewProps
                 <button onClick={toggleViewMode}>
                     Switch to {viewMode === "calendar" ? "List View" : "Calendar View"}
                 </button>
-                <button onClick={() => setShowModal(!showModal)}>Test</button>
+
                 {viewMode === "calendar" ? (
                     (groupedData &&
                         <Calendar groupedData={groupedData} currentSelectedDay={currentSelectedDay} updateDisplayedDay={updateDisplayedDay} />

@@ -26,36 +26,11 @@ function groupTransactionsByDate(data: TransactionType[]): GroupedTransactions {
         const week = getWeekNumber(date).toString().padStart(2, '0');
         const day = date.getDate().toString().padStart(2, '0');
 
-        function initializePeriod<T>(period: Period): T {
-            /**
-             * Initialize a period with the given transactions
-             * @param {string} period - the period to initialize
-             * @returns {T} - the initialized period, where T is the type of the period
-             */
-
-            if (period === Period.DAY) {
-                return {
-                    period,
-                    totalExpense: 0,
-                    totalIncome: 0,
-                    transactions: [] as TransactionType[],
-                } as T;
-            }
-
-            return {
-                period,
-                totalExpense: 0,
-                totalIncome: 0,
-                transactions: {} as Record<string, T>,
-            } as T;
-        }
-
         // Initialize the year, month, week, and day if they do not exist
         if (!grouped.transactions[year]) grouped.transactions[year] = initializePeriod<YearTransactions>(Period.YEAR);
         if (!grouped.transactions[year].transactions[month]) grouped.transactions[year].transactions[month] = initializePeriod<MonthTransactions>(Period.MONTH);
         if (!grouped.transactions[year].transactions[month].transactions[week]) grouped.transactions[year].transactions[month].transactions[week] = initializePeriod<WeekTransactions>(Period.WEEK);
         if (!grouped.transactions[year].transactions[month].transactions[week].transactions[day]) grouped.transactions[year].transactions[month].transactions[week].transactions[day] = initializePeriod<DayTransactions>(Period.DAY);
-
 
         grouped.transactions[year].transactions[month].transactions[week].transactions[day].transactions.push(transaction);
 
@@ -79,4 +54,19 @@ function groupTransactionsByDate(data: TransactionType[]): GroupedTransactions {
     return grouped;
 }
 
-export { groupTransactionsByDate };
+function initializePeriod<T>(period: Period): T {
+    /**
+     * Initialize a period with the given transactions
+     * @param {string} period - the period to initialize
+     * @returns {T} - the initialized period, where T is the type of the period
+     */
+
+    return {
+        period,
+        totalExpense: 0,
+        totalIncome: 0,
+        transactions: period === Period.DAY ? [] as TransactionType[] : {} as Record<string, T>,
+    } as T;
+}
+
+export { groupTransactionsByDate, initializePeriod };
