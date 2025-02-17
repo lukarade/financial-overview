@@ -42,7 +42,6 @@ interface OverviewViewProps {
 function OverviewView({ transactionData, setTransactionData }: OverviewViewProps) {
     const [viewMode, setViewMode] = useState<"calendar" | "list">("calendar");
     const [currentSelectedDay, updateDisplayedDay] = useState(new Date());
-    const [showModal, setShowModal] = useState(false);
     const [isTransactionMenuOpen, setTransactionMenuOpen] = useState(true);
 
     const groupedData = groupTransactionsByDate(transactionData);

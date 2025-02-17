@@ -7,5 +7,18 @@
 }
 
 .list-content {
-    overflow: scroll;
+    overflow-y: scroll;
+}
+
+.list-transaction {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    padding: 3px;
+    outline: 1px solid black;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.list-transaction :last-child {
+    text-align: right;
 }

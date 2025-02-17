@@ -19,9 +19,9 @@ Start Date: 2024-30-11
 - [x] Add a button to navigate to the next year. (2024-05-12)
 - [x] Add a button to navigate to the previous year. (2024-05-12)
 
-- [ ] Double click on a day to add an expense / income.
-- [ ] Open a modal when a day is double clicked.
-- [ ] Add a button to close the modal.
+- [x] Double click on a day to add an expense / income. (canceld 25-15-02)
+- [x] Open a modal when a day is double clicked. (canceld 25-15-02)
+- [x] Add a button to close the modal. (canceld 25-15-02)
 - [x] Add a form to add a new event to the calendar. (2024-13-12)
 - [x] Add a button to delete an event from the calendar. (2024-13-12)
 - [ ] Click on the current day to jump to today, instead of today button
@@ -38,26 +38,26 @@ Start Date: 2024-30-11
 
 
 ## Overview Component
-- [ ] Create an overview component that displays the total income and expenses for the current year/month/week/day.
+- [x] Create an overview component that displays the total income and expenses for the current year/month/week/day.
 
-- [x] Create a bar chart that displays the total income and expenses for the current (2024-04-12)
-  - [x] year: by month (2024-04-12)
-  - [ ] month: by week
-  - [ ] week: by day
+- [x] Create a bar chart that displays the total income and expenses for the current (2025-17-02)
+  - [x] total: by year (2025-17-02)
+  - [x] year: by month (2025-17-02)
+  - [x] month: by day(2025-17-02)
 
-- [ ] Empty months/weeks/days should be displayed as well.
+- [x] Empty months/weeks/days should be displayed as well. (2025-17-02)
 
 - [ ] Create a pie chart that displays the percentage of income and expenses for the current month.
-- [ ] Add a button to navigate to the next month.
-- [ ] Add a button to navigate to the previous month.
+- [x] Add a button to navigate to the next month. (2025-17-02)
+- [x] Add a button to navigate to the previous month. (2025-17-02)
 - [ ] Add a button to navigate to the month of the current day.
-- [ ] Add a button to navigate to the next year.
-- [ ] Add a button to navigate to the previous year.
+- [x] Add a button to navigate to the next year. (2025-17-02)
+- [x] Add a button to navigate to the previous year. (2025-17-02)
 
-- [ ] Options menu to select the time frame (year/month/week/day).
+- [x] Options menu to select the time frame (year/month/week/day). (2025-17-02)
 - [ ] Options menu to select the type of event (income/expense).
 - [ ] Options menu to select the category of the event (food/transportation/entertainment/etc).
-- [ ] Options menu to select the type of chart (pie chart/bar chart/line chart).
+- [x] Options menu to select the type of chart (pie chart/bar chart/line chart). (2025-17-02)
   
 
 ## List Component
@@ -71,8 +71,13 @@ Start Date: 2024-30-11
 - [x] Display the total income and expenses for the current year/month/week/day. (2024-03-12)
 - [ ] Add a button to navigate to the next month.
 - [ ] Add a button to navigate to the previous month.
+
+- [ ] Clicking on an item to show it (the day of that transaction) in the TransactionView
+- [ ] Editmode:
+  - [ ] Toggle Editmode on and off
+  - [ ] Make every entry editable (title, amount category, date)
 ### Bugs
-- [x] Fix the bug that causes the list to generate month/ week/ day components for total income and expenses (which of course are not events). These are not displayed by a workaround with a guard clause in the coresponding component.
+- [x] Fix the bug that causes the list to generate month/ week/ day components for total income and expenses (which of course are not events). These are not displayed by a workaround with a guard clause in the coresponding component. This is also no longer needed with the new data structure
 
 
 ## Financial Flow Component
@@ -90,7 +95,7 @@ Start Date: 2024-30-11
 - [ ] Add option to change the theme.
 
 ## Bugs 
-- [ ] Fix the sorting of the events in the list component. The events are not sorted by date correctly. 
+- [x] Fix the sorting of the events in the list component. The events are not sorted by date correctly. (2025-17-02)
 
 
 

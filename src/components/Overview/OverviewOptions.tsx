@@ -1,5 +1,5 @@
 import React from "react";
-import { ChartType, Period, OverviewOptionsType } from "../../types.ts";
+import { Period, OverviewOptionsType } from "../../types.ts";
 
 interface OverviewOptionsProps {
     overviewOptions: OverviewOptionsType;

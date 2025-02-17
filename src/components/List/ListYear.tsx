@@ -1,32 +1,31 @@
 import React from 'react';
 import ListMonth from './ListMonth.tsx';
-import { MonthTransactions } from '../../types.ts';
+import { Period, YearTransactions } from '../../types.ts';
 
 interface YearProps {
+    yearData: YearTransactions;
     year: string;
-    months: MonthTransactions;
-    totalExpenseYear: number;
-    totalIncomeYear: number;
     sortOption: string;
 }
 
-function ListYear({ year, months, totalExpenseYear, totalIncomeYear, sortOption }: YearProps): JSX.Element {
+function ListYear({ yearData, year, sortOption }: YearProps): JSX.Element {
+    const monthData = yearData?.transactions
+
     return (
         <div>
-            {(sortOption === "year" || sortOption === "month" || sortOption === "week" || sortOption === "day") && <h3>{year} - Total Expense: {totalExpenseYear} - Total Income: {totalIncomeYear}</h3>}
-            {Object.entries(months)
-                .sort((a, b) => parseInt(a[0]) - parseInt(b[0]))
-                .map(([month, weekData]) => {
-                    if (month !== "totalExpense" && month !== "totalIncome") {
-                        const weeks = weekData || [];
-                        const totalExpenseMonth = -weekData?.totalExpense || 0;
-                        const totalIncomeMonth = weekData?.totalIncome || 0;
-                        return (
-                            <ListMonth key={`${year}-${month}`} year={year} month={month} weeks={weeks} totalExpenseMonth={totalExpenseMonth} totalIncomeMonth={totalIncomeMonth} sortOption={sortOption} />
-                        );
-                    }
-                    return null;
-                })}
+            {(sortOption === Period.YEAR || sortOption === Period.MONTH || sortOption === Period.WEEK || sortOption === Period.DAY) && <h3>{year} - Total Expense: {yearData.totalExpense} - Total Income: {yearData.totalIncome}</h3>}
+            {monthData ? Object.entries(monthData)
+                .sort(([a], [b]) => a.localeCompare(b))
+                .map(([month, monthData]) => {
+                    return (
+                        <ListMonth
+                            key={month}
+                            month={month}
+                            monthData={monthData}
+                            sortOption={sortOption}
+                        />
+                    );
+                }) : <div>No Data...</div>}
         </div>
     );
 }

@@ -1,43 +1,31 @@
 import React from "react";
-import { WeekTransactions } from "../../types.ts";
+import { MonthTransactions, Period } from "../../types.ts";
 import ListWeek from "./ListWeek.tsx";
+import { months } from "../../data/constances.ts";
 
 interface MonthProps {
-    year: string;
     month: string;
-    weeks: WeekTransactions;
-    totalExpenseMonth: number;
-    totalIncomeMonth: number;
+    monthData: MonthTransactions;
     sortOption: string;
 }
 
 
-function ListMonth({ year, month, weeks, totalExpenseMonth, totalIncomeMonth, sortOption }: MonthProps): JSX.Element | null {
+function ListMonth({ month, monthData, sortOption }: MonthProps): JSX.Element | null {
+    const weekData = monthData?.transactions
+
     return (
         <div>
-            {(sortOption === "month" || sortOption === "week" || sortOption === "day") && <h4>{year} - Month {month} - Total Expense: {totalExpenseMonth} - Total Income: {totalIncomeMonth}</h4>}
-            {Object.entries(weeks)
-                .sort((a, b) => parseInt(a[0]) - parseInt(b[0]))
-                .map(([week, dayData]) => {
-                    if (week !== "totalExpense" && week !== "totalIncome") {
-                        const days = dayData || [];
-                        const totalExpenseWeek = -dayData?.totalExpense || 0;
-                        const totalIncomeWeek = dayData?.totalIncome || 0;
-                        return (
-                            <ListWeek
-                                key={`${year}-${month}-${week}`}
-                                year={year}
-                                month={month}
-                                week={week}
-                                days={days}
-                                totalExpenseWeek={totalExpenseWeek}
-                                totalIncomeWeek={totalIncomeWeek}
-                                sortOption={sortOption}
-                            />
-                        );
-                    }
-                    return null;
-                })}
+            {(sortOption === Period.MONTH || sortOption === Period.WEEK || sortOption === Period.DAY) && <h4>{months[Number(month) - 1]} - Total Expense: {monthData.totalExpense} - Total Income: {monthData.totalIncome}</h4>}
+
+            {weekData ? Object.entries(monthData.transactions)
+                .sort(([a], [b]) => a.localeCompare(b))
+                .map(([week, weekData]) => (
+                    <ListWeek
+                        key={week}
+                        week={week}
+                        weekData={weekData}
+                        sortOption={sortOption} />
+                )) : <div>No Data...</div>}
         </div>
     );
 }
