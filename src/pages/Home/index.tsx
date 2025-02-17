@@ -9,6 +9,7 @@ import TransactionList from "../../components/TransactionList.tsx";
 import { fetchUserData, getDataForSelectedDay } from "../../utils/utils.ts";
 import { url } from "../../data/constances.ts";
 import { TransactionType } from "../../types.ts";
+import TransactionModal from "../../components/Calendar/TransactionModal.tsx";
 
 // TODO: Clean up the styles when the layout is finalized
 
@@ -43,6 +44,9 @@ function OverviewView({ transactionData, setTransactionData }: OverviewViewProps
     const [viewMode, setViewMode] = useState<"calendar" | "list">("calendar");
     const [currentSelectedDay, updateDisplayedDay] = useState(new Date());
     const [isTransactionMenuOpen, setTransactionMenuOpen] = useState(true);
+    const [showModal, setShowModal] = useState(false);
+    const [modalPosition, setModalPosition] = useState<{ top: number; left: number } | undefined>(undefined);
+
 
     const groupedData = groupTransactionsByDate(transactionData);
     const dataForSelectedDay = getDataForSelectedDay(currentSelectedDay, groupedData);
@@ -50,6 +54,11 @@ function OverviewView({ transactionData, setTransactionData }: OverviewViewProps
     const toggleViewMode = () => {
         setViewMode(prevMode => (prevMode === "calendar" ? "list" : "calendar"));
     };
+
+    const updateModalPosition = (position: { top: number; left: number }) => {
+        setModalPosition(position);
+    };
+
 
     return (
         <div className="total-overview-view">
@@ -62,7 +71,8 @@ function OverviewView({ transactionData, setTransactionData }: OverviewViewProps
             </div>
             <button
                 className="toggle-menu-button"
-                onClick={() => setTransactionMenuOpen(!isTransactionMenuOpen)}>{isTransactionMenuOpen ? "<<" : ">>"}</button>
+                onClick={() => setTransactionMenuOpen(!isTransactionMenuOpen)}>{isTransactionMenuOpen ? "<<" : ">>"}
+            </button>
             <div className={`calendar-frame overview-component`}>
                 <button onClick={toggleViewMode}>
                     Switch to {viewMode === "calendar" ? "List View" : "Calendar View"}
@@ -70,11 +80,27 @@ function OverviewView({ transactionData, setTransactionData }: OverviewViewProps
 
                 {viewMode === "calendar" ? (
                     (groupedData &&
-                        <Calendar groupedData={groupedData} currentSelectedDay={currentSelectedDay} updateDisplayedDay={updateDisplayedDay} />
+                        <Calendar
+                            groupedData={groupedData}
+                            currentSelectedDay={currentSelectedDay}
+                            showModal={showModal}
+                            updateDisplayedDay={updateDisplayedDay}
+                            setShowModal={setShowModal}
+                            updateModalPosition={updateModalPosition}
+                        />
                     )
                 ) : (
                     <List groupedData={groupedData} />
                 )}
+                {showModal ? (
+                    <TransactionModal
+                        transactionData={transactionData}
+                        setTransactionData={setTransactionData}
+                        currentSelectedDay={currentSelectedDay}
+                        setShowModal={setShowModal}
+                        position={modalPosition}
+                    />
+                ) : null}
             </div>
             <div className={`overview overview-component`} >
                 <h3>Overview</h3>

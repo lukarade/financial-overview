@@ -19,9 +19,9 @@ Start Date: 2024-30-11
 - [x] Add a button to navigate to the next year. (2024-05-12)
 - [x] Add a button to navigate to the previous year. (2024-05-12)
 
-- [x] Double click on a day to add an expense / income. (canceld 25-15-02)
-- [x] Open a modal when a day is double clicked. (canceld 25-15-02)
-- [x] Add a button to close the modal. (canceld 25-15-02)
+- [x] Double click on a day to add an expense / income. (25-17-02)
+- [x] Open a modal when a day is double clicked. (25-17-02)
+- [x] Add a button to close the modal. (25-17-02)
 - [x] Add a form to add a new event to the calendar. (2024-13-12)
 - [x] Add a button to delete an event from the calendar. (2024-13-12)
 - [ ] Click on the current day to jump to today, instead of today button

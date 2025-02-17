@@ -1,17 +1,20 @@
-import React, { useMemo } from 'react';
-import { getMonthTransactions, generateDays } from '../../utils/calendarUtils.ts';
-import { GroupedTransactions, MonthTransactions } from '../../types.ts';
-import CalendarDayComponent from './CalendarDay.tsx';
+import React, { Dispatch, SetStateAction, useMemo } from "react";
+import { getMonthTransactions, generateDays } from "../../utils/calendarUtils.ts";
+import { GroupedTransactions, MonthTransactions } from "../../types.ts";
+import CalendarDayComponent from "./CalendarDay.tsx";
 
-import { weekDays } from '../../data/constances.ts';
+import { weekDays } from "../../data/constances.ts";
 
 interface CalendarBodyProps {
     groupedData: GroupedTransactions;
     currentSelectedDay: Date;
+    showModal: boolean;
     onDayClick: (day: Date) => void;
+    setShowModal: Dispatch<SetStateAction<boolean>>
+    updateModalPosition: (position: { top: number; left: number }) => void;
 }
 
-function CalendarBody({ groupedData, currentSelectedDay, onDayClick }: CalendarBodyProps): JSX.Element {
+function CalendarBody({ groupedData, currentSelectedDay, showModal, onDayClick, setShowModal, updateModalPosition }: CalendarBodyProps): JSX.Element {
     const monthTransactions: MonthTransactions | null = useMemo(() => {
         if (groupedData) {
             return getMonthTransactions(currentSelectedDay.getFullYear(), currentSelectedDay.getMonth() + 1, groupedData);
@@ -40,11 +43,16 @@ function CalendarBody({ groupedData, currentSelectedDay, onDayClick }: CalendarB
                 ))}
                 {
                     currentMonth.map((day) => {
+                        const uniqueId = `${day.year}-${day.month}-${day.week}-${day.day}`
                         return (
                             <CalendarDayComponent
-                                key={`${day.year}-${day.month}-${day.week}-${day.day}`}
+                                key={uniqueId}
                                 calendarDay={day}
-                                onDayClick={onDayClick} />
+                                showModal={showModal}
+                                onDayClick={onDayClick}
+                                setShowModal={setShowModal}
+                                updateModalPosition={updateModalPosition}
+                            />
                         );
                     })
                 }
