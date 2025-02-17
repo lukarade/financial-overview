@@ -1,6 +1,6 @@
-import React from 'react';
-import ListMonth from './ListMonth.tsx';
-import { Period, YearTransactions } from '../../types.ts';
+import React from "react";
+import ListMonth from "./ListMonth.tsx";
+import { Period, YearTransactions } from "../../types.ts";
 
 interface YearProps {
     yearData: YearTransactions;

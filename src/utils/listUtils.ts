@@ -22,9 +22,9 @@ function groupTransactionsByDate(data: TransactionType[]): GroupedTransactions {
         // Extract the year, month, week, and day from the transaction date
         const date = new Date(transaction.date);
         const year = date.getFullYear().toString();
-        const month = (date.getMonth() + 1).toString().padStart(2, '0');
-        const week = getWeekNumber(date).toString().padStart(2, '0');
-        const day = date.getDate().toString().padStart(2, '0');
+        const month = (date.getMonth() + 1).toString().padStart(2, "0");
+        const week = getWeekNumber(date).toString().padStart(2, "0");
+        const day = date.getDate().toString().padStart(2, "0");
 
         // Initialize the year, month, week, and day if they do not exist
         if (!grouped.transactions[year]) grouped.transactions[year] = initializePeriod<YearTransactions>(Period.YEAR);

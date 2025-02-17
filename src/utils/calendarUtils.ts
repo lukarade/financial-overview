@@ -1,5 +1,5 @@
-import { CalendarDayType, GroupedTransactions, MonthTransactions, TransactionType } from '../types.ts';
-import { getWeekNumber } from './utils.ts';
+import { CalendarDayType, GroupedTransactions, MonthTransactions, TransactionType } from "../types.ts";
+import { getWeekNumber } from "./utils.ts";
 
 function createCalendarDay(date: Date, currentSelectedDay: Date, monthTransactions: MonthTransactions | null): CalendarDayType {
     /**
@@ -80,7 +80,7 @@ function getMonthTransactions(year: number, month: number, groupedData: GroupedT
         return null;
     }
 
-    const monthTransactions = yearTransactions.transactions[String(month).padStart(2, '0')];
+    const monthTransactions = yearTransactions.transactions[String(month).padStart(2, "0")];
     // console.log("MONTH", monthTransactions);
     if (!monthTransactions) {
         return null;
@@ -95,12 +95,12 @@ function getDayTransactions(monthTransactions: MonthTransactions | null, date: D
     }
     // console.log("DATE", monthTransactions);
 
-    const weekString = String(getWeekNumber(date)).padStart(2, '0');
+    const weekString = String(getWeekNumber(date)).padStart(2, "0");
     if (monthTransactions.transactions[weekString] === undefined) {
         return null;
     }
 
-    const dayString = String(date.getDate()).padStart(2, '0');
+    const dayString = String(date.getDate()).padStart(2, "0");
     if (monthTransactions.transactions[weekString].transactions[dayString] === undefined) {
         return null;
     }

@@ -13,11 +13,11 @@ function OverviewOptions({ overviewOptions, setOverviewOptions }: OverviewOption
         setOverviewOptions({ ...overviewOptions, [name]: value });
     }
 
-    function handleButtonClick(direction: 'previous' | 'next'): void {
+    function handleButtonClick(direction: "previous" | "next"): void {
         if (overviewOptions.overviewType === Period.DAY) {
-            let newMonth = parseInt(overviewOptions.selectedMonth ?? '0', 10);
-            let newYear = parseInt(overviewOptions.selectedYear ?? '0', 10);
-            if (direction === 'previous') {
+            let newMonth = parseInt(overviewOptions.selectedMonth ?? "0", 10);
+            let newYear = parseInt(overviewOptions.selectedYear ?? "0", 10);
+            if (direction === "previous") {
                 newMonth -= 1;
                 if (newMonth < 1) {
                     newMonth = 12;
@@ -30,9 +30,9 @@ function OverviewOptions({ overviewOptions, setOverviewOptions }: OverviewOption
                     newYear += 1;
                 }
             }
-            setOverviewOptions({ ...overviewOptions, selectedMonth: newMonth.toString().padStart(2, '0'), selectedYear: newYear.toString() });
+            setOverviewOptions({ ...overviewOptions, selectedMonth: newMonth.toString().padStart(2, "0"), selectedYear: newYear.toString() });
         } else {
-            const newYear = (parseInt(overviewOptions.selectedYear ?? '0', 10) + (direction === 'previous' ? -1 : 1)).toString();
+            const newYear = (parseInt(overviewOptions.selectedYear ?? "0", 10) + (direction === "previous" ? -1 : 1)).toString();
             setOverviewOptions({ ...overviewOptions, selectedYear: newYear });
         }
     }
@@ -73,11 +73,10 @@ function OverviewOptions({ overviewOptions, setOverviewOptions }: OverviewOption
                 </label>
             )}
 
-            {/* Navigation Buttons */}
-            <div className="navigation-buttons">
+            {overviewOptions.overviewType !== Period.YEAR ? <div className="navigation-buttons">
                 <button onClick={() => handleButtonClick("previous")}>Previous</button>
                 <button onClick={() => handleButtonClick("next")}>Next</button>
-            </div>
+            </div> : null}
         </div>
     );
 }

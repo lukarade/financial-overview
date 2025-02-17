@@ -1,6 +1,6 @@
-import React from 'react';
-import BarGroup from './BarGroup.tsx';
-import { TransactionType, MonthTransactions, YearTransactions, Period, DayTransactions } from '../../types.ts';
+import React from "react";
+import BarGroup from "./BarGroup.tsx";
+import { TransactionType, MonthTransactions, YearTransactions, Period, DayTransactions } from "../../types.ts";
 import { monthsShort } from "../../data/constances.ts";
 
 interface BarChartProps {
@@ -47,9 +47,9 @@ function BarChart({ overviewData, chartWidth, barHeight }: BarChartProps): JSX.E
         allPeriods.push(...Object.keys(overviewData));
     }
     else if (periodType === Period.MONTH) {
-        allPeriods = Array.from({ length: 12 }, (_, i) => (i + 1).toString().padStart(2, '0'));  // Safeguard to make sure all months of the year are included and in the right order
+        allPeriods = Array.from({ length: 12 }, (_, i) => (i + 1).toString().padStart(2, "0"));  // Safeguard to make sure all months of the year are included and in the right order
     } else if (periodType === Period.DAY) {
-        allPeriods = Array.from({ length: 31 }, (_, i) => (i + 1).toString().padStart(2, '0')); // Safeguard to make sure all days of the month are included and in the right order
+        allPeriods = Array.from({ length: 31 }, (_, i) => (i + 1).toString().padStart(2, "0")); // Safeguard to make sure all days of the month are included and in the right order
     }
 
     // Get the income and expense data for each month

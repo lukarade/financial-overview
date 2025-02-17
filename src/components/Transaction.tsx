@@ -13,8 +13,8 @@ interface TransactionProps {
 function Transaction({ transaction, setTransactionData }: TransactionProps): JSX.Element {
     const isExpense = transaction.amount < 0;
     const styles = {
-        color: isExpense ? 'red' : 'green',
-        backgroundColor: isExpense ? '#ffe6e6' : '#e6ffe6',
+        color: isExpense ? "red" : "green",
+        backgroundColor: isExpense ? "#ffe6e6" : "#e6ffe6",
     };
 
     function handleDelete() {
@@ -22,7 +22,7 @@ function Transaction({ transaction, setTransactionData }: TransactionProps): JSX
             deleteTransaction(url, transaction.id);
             setTransactionData((prevData) => prevData.filter((t) => t.id !== transaction.id));
         } catch (error) {
-            console.error('Error deleting transaction:', error);
+            console.error("Error deleting transaction:", error);
         }
     }
 

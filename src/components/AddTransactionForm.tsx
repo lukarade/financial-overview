@@ -11,10 +11,10 @@ interface AddTransactionFormProps {
 }
 
 function AddTransactionForm({ transactionData, setTransactionData, currentSelectedDay }: AddTransactionFormProps): JSX.Element {
-    const [title, setTitle] = useState('');
-    const [amount, setAmount] = useState('');
-    const [date, setDate] = useState(new Date().toISOString().split('T')[0]);
-    const [category, setCategory] = useState('');
+    const [title, setTitle] = useState("");
+    const [amount, setAmount] = useState("");
+    const [date, setDate] = useState(new Date().toISOString().split("T")[0]);
+    const [category, setCategory] = useState("");
     const [errors, setErrors] = useState<{ title?: boolean; amount?: boolean; date?: boolean }>({});
 
     useEffect(() => {
@@ -22,7 +22,7 @@ function AddTransactionForm({ transactionData, setTransactionData, currentSelect
         const currentSelectedDayCorrected = new Date(currentSelectedDay);
         currentSelectedDayCorrected.setMinutes(currentSelectedDay.getMinutes() - currentSelectedDay.getTimezoneOffset());
 
-        setDate(currentSelectedDayCorrected.toISOString().split('T')[0]);
+        setDate(currentSelectedDayCorrected.toISOString().split("T")[0]);
     }, [currentSelectedDay]);
 
     function validateForm(): boolean {
@@ -48,10 +48,10 @@ function AddTransactionForm({ transactionData, setTransactionData, currentSelect
 
         setTransactionData([...transactionData, transaction]);
         postTransaction(url, transaction);
-        setTitle('');
-        setAmount('');
-        setDate('');
-        setCategory('');
+        setTitle("");
+        setAmount("");
+        setDate("");
+        setCategory("");
         setErrors({});
     };
 
@@ -64,7 +64,7 @@ function AddTransactionForm({ transactionData, setTransactionData, currentSelect
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
                     placeholder="Title"
-                    className={errors.title ? 'error' : ''}
+                    className={errors.title ? "error" : ""}
                 />
             </label>
             <label>
@@ -74,7 +74,7 @@ function AddTransactionForm({ transactionData, setTransactionData, currentSelect
                     value={amount}
                     onChange={(e) => setAmount(e.target.value)}
                     placeholder="Amount"
-                    className={errors.amount ? 'error' : ''}
+                    className={errors.amount ? "error" : ""}
                 />
             </label>
             <label>
@@ -83,7 +83,7 @@ function AddTransactionForm({ transactionData, setTransactionData, currentSelect
                     name="dateInput"
                     value={date}
                     onChange={(e) => setDate(e.target.value)}
-                    className={errors.date ? 'error' : ''}
+                    className={errors.date ? "error" : ""}
                 />
             </label>
             <label>

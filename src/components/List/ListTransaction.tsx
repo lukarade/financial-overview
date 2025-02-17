@@ -9,7 +9,7 @@ interface ListTransactionProps {
 
 function ListTransaction({ transaction }: ListTransactionProps) {
     const styles = {
-        color: transaction.amount < 0 ? 'red' : 'green',
+        color: transaction.amount < 0 ? "red" : "green",
     };
 
     return (

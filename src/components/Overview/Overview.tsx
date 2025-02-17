@@ -14,7 +14,7 @@ function Overview({ groupedData }: { groupedData: GroupedTransactions | null }):
         chartType: ChartType.BAR,
         overviewType: Period.MONTH,
         selectedYear: new Date().getFullYear().toString(),
-        selectedMonth: (new Date().getMonth() + 1).toString().padStart(2, '0'),
+        selectedMonth: (new Date().getMonth() + 1).toString().padStart(2, "0"),
     });
     const [overviewData, setGroupedData] = useState<TransactionType[] | Record<string, YearTransactions | MonthTransactions | DayTransactions> | null>(null);
     const [loadingOverviewData, setLoadingOverviewData] = useState<boolean>(false);

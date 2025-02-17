@@ -18,7 +18,7 @@ async function getDataForSelectedOption(groupedData: GroupedTransactions, overvi
 
     if (overviewOptions.overviewType === Period.MONTH && overviewOptions?.selectedYear) {
         const yearTransactions = groupedData.transactions[overviewOptions.selectedYear]?.transactions || {};
-        const allPeriods = Array.from({ length: 12 }, (_, i) => (i + 1).toString().padStart(2, '0'));
+        const allPeriods = Array.from({ length: 12 }, (_, i) => (i + 1).toString().padStart(2, "0"));
 
         return allPeriods.reduce((acc, month) => {
             acc[month] = yearTransactions[month] || initializePeriod<MonthTransactions>(Period.MONTH);
@@ -29,7 +29,7 @@ async function getDataForSelectedOption(groupedData: GroupedTransactions, overvi
     if (overviewOptions.overviewType === Period.DAY && overviewOptions?.selectedYear && overviewOptions?.selectedMonth) {
         const weekTransactions = groupedData?.transactions[overviewOptions.selectedYear]?.transactions[overviewOptions.selectedMonth]?.transactions || null;
         if (!weekTransactions) {
-            return Array.from({ length: 31 }, (_, i) => (i + 1).toString().padStart(2, '0')).reduce((acc, day) => {
+            return Array.from({ length: 31 }, (_, i) => (i + 1).toString().padStart(2, "0")).reduce((acc, day) => {
                 acc[day] = initializePeriod<DayTransactions>(Period.DAY);
                 return acc;
             }, {} as Record<string, DayTransactions>);

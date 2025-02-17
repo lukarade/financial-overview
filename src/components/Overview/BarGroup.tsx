@@ -1,7 +1,7 @@
-import React from 'react';
+import React from "react";
 import Bar from "./Bar.tsx";
 
-import { DayTransactions, MonthTransactions, TransactionType, YearTransactions } from '../../types.ts';
+import { DayTransactions, MonthTransactions, TransactionType, YearTransactions } from "../../types.ts";
 
 interface BarGroupProps {
     data: YearTransactions | MonthTransactions | DayTransactions | TransactionType[] | null;
