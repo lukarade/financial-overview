@@ -73,7 +73,7 @@ function OverviewView({ transactionData, setTransactionData }: OverviewViewProps
                 className="toggle-menu-button"
                 onClick={() => setTransactionMenuOpen(!isTransactionMenuOpen)}>{isTransactionMenuOpen ? "<<" : ">>"}
             </button>
-            <div className={`calendar-frame overview-component`}>
+            <div className={"calendar-frame overview-component"}>
                 <button onClick={toggleViewMode}>
                     Switch to {viewMode === "calendar" ? "List View" : "Calendar View"}
                 </button>
@@ -104,7 +104,7 @@ function OverviewView({ transactionData, setTransactionData }: OverviewViewProps
             </div>
             <div className={`overview overview-component`} >
                 <h3>Overview</h3>
-                <Overview groupedData={groupedData} />
+                <Overview groupedData={groupedData} isTransactionMenuOpen={isTransactionMenuOpen} />
             </div>
         </div>
     );

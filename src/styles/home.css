@@ -48,7 +48,7 @@
 }
 
 .transaction-menu.open {
-    width: 25%; /* Slide in */
+    width: 15%; /* Slide in */
     overflow: visible; 
 }
 

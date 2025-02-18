@@ -8,8 +8,12 @@ import { getDataForSelectedOption } from "../../utils/overviewUtils.ts";
 
 import "../../styles/bar-chart.css";
 
+interface OverviewProps {
+    groupedData: GroupedTransactions | null;
+    isTransactionMenuOpen: boolean;
+}
 
-function Overview({ groupedData }: { groupedData: GroupedTransactions | null }): JSX.Element {
+function Overview({ groupedData, isTransactionMenuOpen }: OverviewProps): JSX.Element {
     const [overviewOptions, setOverviewOptions] = useState<OverviewOptionsType>({
         chartType: ChartType.BAR,
         overviewType: Period.MONTH,
@@ -40,7 +44,7 @@ function Overview({ groupedData }: { groupedData: GroupedTransactions | null }):
             ) : !overviewData || !groupedData ? (
                 <div>No data available</div>
             ) : (
-                <Chart overviewData={overviewData} overviewOptions={overviewOptions} />
+                <Chart overviewData={overviewData} overviewOptions={overviewOptions} isTransactionMenuOpen={isTransactionMenuOpen} />
             )}
             <OverviewOptions overviewOptions={overviewOptions} setOverviewOptions={setOverviewOptions} />
         </div>

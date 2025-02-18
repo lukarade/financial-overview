@@ -44,6 +44,7 @@ Start Date: 2024-30-11
   - [x] total: by year (2025-17-02)
   - [x] year: by month (2025-17-02)
   - [x] month: by day(2025-17-02)
+  - [ ] custom time period
 
 - [x] Empty months/weeks/days should be displayed as well. (2025-17-02)
 
@@ -65,6 +66,7 @@ Start Date: 2024-30-11
 - [x] Create a list component that displays all the income and expenses for the current year/month/week/day.
 - [] Add filters to sort the events by:
   - [x] Date (2024-02-12)
+  - [ ] Date-Custom period
   - [ ] Amount
   - [ ] Category
   - [ ] Type
@@ -73,11 +75,18 @@ Start Date: 2024-30-11
 - [ ] Add a button to navigate to the previous month.
 
 - [ ] Clicking on an item to show it (the day of that transaction) in the TransactionView
-- [ ] Editmode:
+- [ ] Editmode (possibility to edit many transactions very fast):
   - [ ] Toggle Editmode on and off
   - [ ] Make every entry editable (title, amount category, date)
 ### Bugs
 - [x] Fix the bug that causes the list to generate month/ week/ day components for total income and expenses (which of course are not events). These are not displayed by a workaround with a guard clause in the coresponding component. This is also no longer needed with the new data structure
+
+
+## Reoccurring transactions
+- [ ] Add a menu to add/remove/edit reoccurring transactions (like salary, rent, etc.)
+- [ ] Set the frequency of these reoccurring transactions
+- [ ] Set an optional start and end date
+- [ ] Add the option to display them in the overview/calendar/list
 
 
 ## Financial Flow Component
@@ -105,4 +114,3 @@ Start Date: 2024-30-11
 -  [ ] The Add Transaction Form should be animated when it appears.
 -  [ ] The Add Transaction Form should be animated when it disappears.
 -  [ ] The Add Transaction Form should be animated when it is submitted (swift up and append to the list).
--  [ ] If the user has startet putting text into the form it should not disappear when the mouse leaves the button. Instead, it should stay visible until the user clicks the submit button or the cancel button. Otherwise, it should disappear when the mouse leaves the button.
