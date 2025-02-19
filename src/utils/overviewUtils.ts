@@ -27,7 +27,7 @@ async function getDataForSelectedOption(groupedData: GroupedTransactions, overvi
     }
 
     if (overviewOptions.overviewType === Period.DAY && overviewOptions?.selectedYear && overviewOptions?.selectedMonth) {
-        const weekTransactions = groupedData?.transactions[overviewOptions.selectedYear]?.transactions[overviewOptions.selectedMonth]?.transactions || null;
+        const weekTransactions = groupedData?.transactions[overviewOptions.selectedYear]?.transactions[overviewOptions.selectedMonth.padStart(2, "0")]?.transactions || null;
         if (!weekTransactions) {
             return Array.from({ length: 31 }, (_, i) => (i + 1).toString().padStart(2, "0")).reduce((acc, day) => {
                 acc[day] = initializePeriod<DayTransactions>(Period.DAY);
