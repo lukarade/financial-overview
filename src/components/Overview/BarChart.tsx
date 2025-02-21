@@ -1,7 +1,7 @@
 import React from "react";
 import BarGroup from "./BarGroup.tsx";
 import { TransactionType, MonthTransactions, YearTransactions, Period, DayTransactions } from "../../types.ts";
-import { monthsShort } from "../../data/constances.ts";
+import { getLabel } from "../../utils/overviewUtils.ts";
 
 interface BarChartProps {
     overviewData: TransactionType[] | Record<string, YearTransactions | MonthTransactions | DayTransactions> | null;
@@ -9,15 +9,6 @@ interface BarChartProps {
     barHeight: number;
 }
 
-function getLabel(period: string, periodType: Period): string {
-    if (periodType === Period.YEAR) {
-        return period;
-    }
-    if (periodType === Period.MONTH) {
-        return monthsShort[parseInt(period) - 1];
-    }
-    return period;
-}
 
 function BarChart({ overviewData, chartWidth, barHeight }: BarChartProps): JSX.Element {
     // TODO: Handle invalid data better (Case for TransactionType[] is not handled)

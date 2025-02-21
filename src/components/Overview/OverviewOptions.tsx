@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { Period, OverviewOptionsType, ChartType } from "../../types.ts";
+import React, { useState } from "react";
+import { Period, OverviewOptionsType } from "../../types.ts";
 import "../../styles/overview.css";
 
 interface OverviewOptionsProps {
@@ -113,7 +113,7 @@ function OverviewOptions({ overviewOptions, setOverviewOptions }: OverviewOption
             <label>
                 Overview Type:
                 <select value={overviewOptions.overviewType} onChange={handleInputChange} name="overviewType">
-                    {overviewOptions.chartType === ChartType.BAR && <option value="total">Total</option>}
+                    <option value="total">Total</option>
                     <option value="year">Year</option>
                     <option value="month">Month</option>
                     <option value="day">Day</option>

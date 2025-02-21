@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import BarChart from "./BarChart.tsx";
 import { ChartType, OverviewOptionsType, TransactionType, YearTransactions, MonthTransactions, DayTransactions, Period } from "../../types.ts";
+import PieChart from "./PieChart.tsx";
 
 interface ChartProps {
     overviewData: TransactionType[] | Record<string, YearTransactions | MonthTransactions | DayTransactions> | null;
@@ -37,8 +38,8 @@ function Chart({ overviewData, overviewOptions, isTransactionMenuOpen }: ChartPr
             <svg width={chartWidth} height={chartHeight} style={{ border: "1px solid black" }}>
                 <g className="container">
                     {overviewOptions.chartType === ChartType.BAR ? <BarChart overviewData={overviewData} chartWidth={chartWidth} barHeight={barHeight} /> :
-                        // overviewOptions.chartType === ChartType.LINE ? <LineChart overviewData={overviewData} chartWidth={chartWidth} /> : 
-                        null}
+                        overviewOptions.chartType === ChartType.PIE ? <PieChart overviewData={overviewData} chartWidth={chartWidth} /> :
+                            null}
                 </g>
             </svg>
         </div>

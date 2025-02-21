@@ -1,5 +1,6 @@
 import { initializePeriod } from "./listUtils.ts";
 import { GroupedTransactions, OverviewOptionsType, TransactionType, YearTransactions, MonthTransactions, DayTransactions, Period } from "../types.ts";
+import { monthsShort } from "../data/constances.ts";
 
 async function getDataForSelectedOption(groupedData: GroupedTransactions, overviewOptions: OverviewOptionsType): Promise<TransactionType[] | Record<string, YearTransactions | MonthTransactions | DayTransactions> | null> {
     /**
@@ -43,4 +44,24 @@ async function getDataForSelectedOption(groupedData: GroupedTransactions, overvi
     return null;
 }
 
-export { getDataForSelectedOption };
+
+function getLabel(period: string, periodType: Period): string {
+    /**
+     * Returns the label for the plots depending on the period type.
+     * 
+     * @param period - The period to get the label for. This can be a year or a month represented as a string.
+     * @param periodType - The type of the period, which can be either `Period.YEAR` or `Period.MONTH`.
+     * @returns The label for the given period. If the period type is `Period.YEAR`, it returns the period as is.
+     * If the period type is `Period.MONTH`, it returns the abbreviated month name.
+     */
+
+    if (periodType === Period.YEAR) {
+        return period;
+    }
+    if (periodType === Period.MONTH) {
+        return monthsShort[parseInt(period) - 1];
+    }
+    return period;
+}
+
+export { getDataForSelectedOption, getLabel };
