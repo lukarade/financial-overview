@@ -16,7 +16,7 @@ interface OverviewProps {
 function Overview({ groupedData, isTransactionMenuOpen }: OverviewProps): JSX.Element {
     const [overviewOptions, setOverviewOptions] = useState<OverviewOptionsType>({
         chartType: ChartType.BAR,
-        overviewType: Period.MONTH,
+        overviewType: Period.YEAR,
         selectedYear: new Date().getFullYear().toString(),
         selectedMonth: (new Date().getMonth() + 1).toString(),
     });

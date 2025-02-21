@@ -31,6 +31,7 @@ interface Income extends TransactionType {
 
 // TODO: In the future Period could be of variable length that can be changed by the user
 enum Period {
+    TOTAL = "total",
     YEAR = "year",
     MONTH = "month",
     WEEK = "week",

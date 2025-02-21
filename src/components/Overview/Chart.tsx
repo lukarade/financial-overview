@@ -9,8 +9,8 @@ interface ChartProps {
 }
 
 function Chart({ overviewData, overviewOptions, isTransactionMenuOpen }: ChartProps): JSX.Element {
-    const barHeight = overviewOptions.overviewType === Period.DAY ? 10 : 20;
-    const numBars = overviewOptions.overviewType === Period.YEAR ? (overviewData ? Object.keys(overviewData).length : 0) : (overviewOptions.overviewType === Period.MONTH ? 12 : 31);
+    const barHeight = overviewOptions.overviewType === Period.MONTH ? 10 : 20;
+    const numBars = (overviewOptions.overviewType === Period.TOTAL || overviewOptions.overviewType === Period.DAY) ? (overviewData ? Object.keys(overviewData).length : 0) : (overviewOptions.overviewType === Period.YEAR ? 12 : 31);
     const chartHeight = 2 * numBars * barHeight > 482 ? 2 * numBars * barHeight : 482;
     const chartContainerRef = React.useRef<HTMLDivElement>(null);
     const [chartWidth, setChartWidth] = React.useState(400);

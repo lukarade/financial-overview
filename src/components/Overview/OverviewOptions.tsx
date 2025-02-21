@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Period, OverviewOptionsType } from "../../types.ts";
+import React, { useEffect, useState } from "react";
+import { Period, OverviewOptionsType, ChartType } from "../../types.ts";
 import "../../styles/overview.css";
 
 interface OverviewOptionsProps {
@@ -113,13 +113,14 @@ function OverviewOptions({ overviewOptions, setOverviewOptions }: OverviewOption
             <label>
                 Overview Type:
                 <select value={overviewOptions.overviewType} onChange={handleInputChange} name="overviewType">
+                    {overviewOptions.chartType === ChartType.BAR && <option value="total">Total</option>}
                     <option value="year">Year</option>
                     <option value="month">Month</option>
                     <option value="day">Day</option>
                 </select>
             </label>
 
-            {(overviewOptions.overviewType === Period.MONTH || overviewOptions.overviewType === Period.DAY) && (
+            {(overviewOptions.overviewType === Period.YEAR || overviewOptions.overviewType === Period.MONTH || overviewOptions.overviewType === Period.DAY) && (
                 <label>
                     Year:
                     <input
@@ -132,7 +133,7 @@ function OverviewOptions({ overviewOptions, setOverviewOptions }: OverviewOption
                 </label>
             )}
 
-            {overviewOptions.overviewType === Period.DAY && (
+            {(overviewOptions.overviewType === Period.MONTH || overviewOptions.overviewType === Period.DAY) && (
                 <label>
                     Month:
                     <input
@@ -145,7 +146,20 @@ function OverviewOptions({ overviewOptions, setOverviewOptions }: OverviewOption
                 </label>
             )}
 
-            {overviewOptions.overviewType !== Period.YEAR && (
+            {/* {overviewOptions.overviewType === Period.DAY && (
+                <label>
+                    Day:
+                    <input
+                        type="text"
+                        name="selectedDay"
+                    value={currentSelectedMonthOption ?? new Date().getMonth()}
+                    onChange={handleInputChange}
+                    className={inputError.selectedMonth ? "input-error" : ""}
+                    />
+                </label>
+            )} */}
+
+            {overviewOptions.overviewType !== Period.TOTAL && (
                 <div className="navigation-buttons">
                     <button onClick={() => handleButtonClick("previous")}>Previous</button>
                     <button onClick={() => handleButtonClick("next")}>Next</button>

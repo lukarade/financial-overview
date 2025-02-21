@@ -12,11 +12,11 @@ async function getDataForSelectedOption(groupedData: GroupedTransactions, overvi
      * @param overviewOptions - The selected overview options
      * @returns The transactions for the selected overview option
      */
-    if (overviewOptions.overviewType === Period.YEAR) {
+    if (overviewOptions.overviewType === Period.TOTAL) {
         return groupedData.transactions as Record<string, YearTransactions>;
     }
 
-    if (overviewOptions.overviewType === Period.MONTH && overviewOptions?.selectedYear) {
+    if (overviewOptions.overviewType === Period.YEAR && overviewOptions?.selectedYear) {
         const yearTransactions = groupedData.transactions[overviewOptions.selectedYear]?.transactions || {};
         const allPeriods = Array.from({ length: 12 }, (_, i) => (i + 1).toString().padStart(2, "0"));
 
@@ -26,7 +26,7 @@ async function getDataForSelectedOption(groupedData: GroupedTransactions, overvi
         }, {} as Record<string, MonthTransactions>);
     }
 
-    if (overviewOptions.overviewType === Period.DAY && overviewOptions?.selectedYear && overviewOptions?.selectedMonth) {
+    if (overviewOptions.overviewType === Period.MONTH && overviewOptions?.selectedYear && overviewOptions?.selectedMonth) {
         const weekTransactions = groupedData?.transactions[overviewOptions.selectedYear]?.transactions[overviewOptions.selectedMonth.padStart(2, "0")]?.transactions || null;
         if (!weekTransactions) {
             return Array.from({ length: 31 }, (_, i) => (i + 1).toString().padStart(2, "0")).reduce((acc, day) => {

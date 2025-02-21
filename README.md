@@ -49,6 +49,7 @@ Start Date: 2024-30-11
 - [x] Empty months/weeks/days should be displayed as well. (2025-17-02)
 
 - [ ] Create a pie chart that displays the percentage of income and expenses for the current month.
+  - [ ] Income vs. Expense
 - [x] Add a button to navigate to the next month. (2025-17-02)
 - [x] Add a button to navigate to the previous month. (2025-17-02)
 - [ ] Add a button to navigate to the month of the current day.
