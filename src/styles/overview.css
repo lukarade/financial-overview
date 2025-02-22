@@ -2,3 +2,40 @@
     outline: 2px solid red;
     box-shadow: 0 0 5px red;
 }
+
+.overview-chart {
+    width: 100%;
+}
+
+.overview-svg{
+    border: 1px solid black;
+}
+
+.chart-section .name-label {
+    text-anchor: end;
+    font-weight: 300;
+    font-size: 1em;
+    /* fill: #333; */
+}
+
+.chart-section .value-label {
+    text-anchor: end;
+    /* fill: #fff; */
+    font-weight: 900;
+    font-size: 0.7em;
+}
+
+.chart-container .chart-section {
+    transition: opacity 0.3s;
+}
+
+/* Fade bars when the chart is hovered */
+.chart-container:hover .chart-section {
+    opacity: 0.3;
+}
+
+/* But don't fade the hovered bar... */
+.chart-container .chart-section:hover {
+    opacity: 1;
+}
+  

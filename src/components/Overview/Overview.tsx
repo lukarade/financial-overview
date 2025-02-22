@@ -6,8 +6,6 @@ import Chart from "./Chart.tsx";
 import { GroupedTransactions, OverviewOptionsType, MonthTransactions, YearTransactions, Period, ChartType, DayTransactions, TransactionType } from "../../types.ts";
 import { getDataForSelectedOption } from "../../utils/overviewUtils.ts";
 
-import "../../styles/bar-chart.css";
-
 interface OverviewProps {
     groupedData: GroupedTransactions | null;
     isTransactionMenuOpen: boolean;

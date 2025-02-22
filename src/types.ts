@@ -82,6 +82,13 @@ type OverviewOptionsType = {
 }
 
 
+type PieSliceData = {
+    period: string;
+    value: number;
+    percentage: number;
+}
+
+
 export {
     CalendarDayType,
     FinancialData,
@@ -96,5 +103,6 @@ export {
     WeekTransactions,
     MonthTransactions,
     YearTransactions,
-    OverviewOptionsType
+    OverviewOptionsType,
+    PieSliceData
 };

@@ -22,7 +22,7 @@ function BarGroup({ data, label, maxValue, barHeight, chartWidth }: BarGroupProp
     const expenseData = -data.totalExpense;
 
     return (
-        <g className="bar-group">
+        <g className="chart-section">
             <text className="name-label" x="-10" y={barHeight + 5} alignmentBaseline="middle">{label}</text>
             <g transform={`translate(0, 0)`}>
                 <Bar amount={incomeData} maxValue={maxValue} barHeight={barHeight} barColor="#348AA7" chartWidth={chartWidth} />
