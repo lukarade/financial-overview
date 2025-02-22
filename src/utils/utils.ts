@@ -66,5 +66,22 @@ async function deleteTransaction(url: string, transactionId: string): Promise<vo
     }
 }
 
+async function updateTransaction(url: string, transactionId: string, updatedTransaction: TransactionType): Promise<void> {
+    try {
+        const response = await fetch(`${url}/${transactionId}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(updatedTransaction),
+        });
+        if (!response.ok) {
+            throw new Error(response.statusText);
+        }
+    } catch (e: any) {
+        throw new Error(e.message);
+    }
+}
 
-export { getWeekNumber, getDataForSelectedDay, fetchUserData, postTransaction, deleteTransaction };
+
+export { getWeekNumber, getDataForSelectedDay, fetchUserData, postTransaction, deleteTransaction, updateTransaction };

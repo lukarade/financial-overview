@@ -65,7 +65,7 @@ function OverviewOptions({ overviewOptions, setOverviewOptions }: OverviewOption
     };
 
     const handleButtonClick = (direction: "previous" | "next"): void => {
-        if (overviewOptions.overviewType === Period.DAY) {
+        if (overviewOptions.overviewType === Period.MONTH) {
             handleDayNavigation(direction);
         } else {
             handleYearNavigation(direction);
