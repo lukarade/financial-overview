@@ -27,12 +27,18 @@ function PieChart({ overviewData, chartWidth }: PieChartProps): JSX.Element {
 
     // TODO: Handle invalid data better (Case for TransactionType[] is not handled)
     if (Array.isArray(overviewData) || !overviewData) {
-        return <div>Invalid data</div>;
+        return <g>
+            <text x="100" y="100">No transactions yet - add transactions first</text>
+
+        </g>;
     }
 
     const firstKey = overviewData ? Object.keys(overviewData)[0] : null;
     if (!firstKey) {
-        return <div>Invalid data</div>;
+        return <g>
+            <text x="100" y="100">No transactions yet - add transactions first</text>
+
+        </g>;
     }
     const firstItemOfPeriod = overviewData ? overviewData[firstKey] : null;
     const periodType = firstItemOfPeriod?.period || Period.YEAR;
@@ -66,16 +72,21 @@ function PieChart({ overviewData, chartWidth }: PieChartProps): JSX.Element {
     return (
         <>
             {/* TODO: Add title, lines and legend */}
-            <g className="pie-charts">
-                <g transform={`translate(${chartWidth / 4}, ${chartWidth / 3})`}>
-                    <text className="name-label" x="0" y={`-${chartWidth / 4}`} alignmentBaseline="middle" textAnchor="middle">Income</text>
-                    {pieSlicesIncome}
+            {pieSlicesExpenses.length > 0 || pieSlicesIncome.length > 0 ?
+                <g className="pie-charts">
+                    <g transform={`translate(${chartWidth / 4}, ${chartWidth / 3})`}>
+                        <text className="name-label" x="0" y={`-${chartWidth / 4}`} alignmentBaseline="middle" textAnchor="middle">Income</text>
+                        {pieSlicesIncome}
+                    </g>
+                    <g transform={`translate(${(3 * chartWidth) / 4}, ${chartWidth / 3})`}>
+                        <text className="name-label" x="0" y={`-${chartWidth / 4}`} alignmentBaseline="middle" textAnchor="middle">Expense</text>
+                        {pieSlicesExpenses}
+                    </g>
+                </g> :
+                <g>
+                    <text x="100" y="100">No transactions yet - add transactions first</text>
                 </g>
-                <g transform={`translate(${(3 * chartWidth) / 4}, ${chartWidth / 3})`}>
-                    <text className="name-label" x="0" y={`-${chartWidth / 4}`} alignmentBaseline="middle" textAnchor="middle">Expense</text>
-                    {pieSlicesExpenses}
-                </g>
-            </g>
+            }
         </>
     );
 }

@@ -30,7 +30,7 @@ function List({ groupedData, setTransactionData }: ListProps): JSX.Element {
                 </select>
             </div>
             <div className="list-content">
-                {listData ? Object.entries(listData).map(([year, yearData]) => {
+                {listData && Object.keys(listData).length > 0 ? Object.entries(listData).map(([year, yearData]) => {
                     return (
                         <ListYear
                             key={year}
@@ -40,7 +40,7 @@ function List({ groupedData, setTransactionData }: ListProps): JSX.Element {
                             setTransactionData={setTransactionData}
                         />
                     );
-                }) : <div>No Data...</div>}
+                }) : <div>No transactions yet - add transactions first</div>}
             </div>
         </div>
     );

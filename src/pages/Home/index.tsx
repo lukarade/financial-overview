@@ -145,7 +145,7 @@ function Home() {
     return (
         <div className="prevent-select">
             <Header />
-            {loading ? <div>Loading Data...</div> : transactionData.length > 0 && <OverviewView transactionData={transactionData} setTransactionData={setTransactionData} />}
+            {loading ? <div>Loading Data...</div> : <OverviewView transactionData={transactionData} setTransactionData={setTransactionData} />}
             <FlowView />
             <Footer />
         </div>
