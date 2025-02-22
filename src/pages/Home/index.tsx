@@ -90,9 +90,9 @@ function OverviewView({ transactionData, setTransactionData }: OverviewViewProps
                         />
                     )
                 ) : (
-                    <List groupedData={groupedData} />
+                    <List groupedData={groupedData} setTransactionData={setTransactionData} />
                 )}
-                {showModal ? (
+                {viewMode === "calendar" && showModal ? (
                     <TransactionModal
                         transactionData={transactionData}
                         setTransactionData={setTransactionData}

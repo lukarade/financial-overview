@@ -1,14 +1,15 @@
 import React from "react";
 import ListMonth from "./ListMonth.tsx";
-import { Period, YearTransactions } from "../../types.ts";
+import { Period, TransactionType, YearTransactions } from "../../types.ts";
 
 interface YearProps {
     yearData: YearTransactions;
     year: string;
     sortOption: string;
+    setTransactionData: React.Dispatch<React.SetStateAction<TransactionType[]>>;
 }
 
-function ListYear({ yearData, year, sortOption }: YearProps): JSX.Element {
+function ListYear({ yearData, year, sortOption, setTransactionData }: YearProps): JSX.Element {
     const monthData = yearData?.transactions
 
     return (
@@ -23,6 +24,7 @@ function ListYear({ yearData, year, sortOption }: YearProps): JSX.Element {
                             month={month}
                             monthData={monthData}
                             sortOption={sortOption}
+                            setTransactionData={setTransactionData}
                         />
                     );
                 }) : <div>No Data...</div>}

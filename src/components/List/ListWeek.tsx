@@ -1,15 +1,16 @@
 import React from "react";
-import { Period, WeekTransactions } from "../../types.ts";
+import { Period, TransactionType, WeekTransactions } from "../../types.ts";
 import ListDay from "./ListDay.tsx";
 
 interface WeekProps {
     week: string;
     weekData: WeekTransactions;
     sortOption: string;
+    setTransactionData: React.Dispatch<React.SetStateAction<TransactionType[]>>;
 }
 
 
-function ListWeek({ week, weekData, sortOption }: WeekProps): JSX.Element | null {
+function ListWeek({ week, weekData, sortOption, setTransactionData }: WeekProps): JSX.Element | null {
     const dayData = weekData?.transactions
 
     return (
@@ -21,7 +22,9 @@ function ListWeek({ week, weekData, sortOption }: WeekProps): JSX.Element | null
                     transactions={dayData.transactions}
                     totalExpense={dayData.totalExpense}
                     totalIncome={dayData.totalIncome}
-                    sortOption={sortOption} />
+                    sortOption={sortOption}
+                    setTransactionData={setTransactionData}
+                />
             )) : <div>No Data...</div>}
         </div>
     );

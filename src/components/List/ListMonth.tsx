@@ -1,5 +1,5 @@
 import React from "react";
-import { MonthTransactions, Period } from "../../types.ts";
+import { MonthTransactions, Period, TransactionType } from "../../types.ts";
 import ListWeek from "./ListWeek.tsx";
 import { months } from "../../data/constances.ts";
 
@@ -7,10 +7,11 @@ interface MonthProps {
     month: string;
     monthData: MonthTransactions;
     sortOption: string;
+    setTransactionData: React.Dispatch<React.SetStateAction<TransactionType[]>>;
 }
 
 
-function ListMonth({ month, monthData, sortOption }: MonthProps): JSX.Element | null {
+function ListMonth({ month, monthData, sortOption, setTransactionData }: MonthProps): JSX.Element | null {
     const weekData = monthData?.transactions
 
     return (
@@ -24,7 +25,9 @@ function ListMonth({ month, monthData, sortOption }: MonthProps): JSX.Element | 
                         key={week}
                         week={week}
                         weekData={weekData}
-                        sortOption={sortOption} />
+                        sortOption={sortOption}
+                        setTransactionData={setTransactionData}
+                    />
                 )) : <div>No Data...</div>}
         </div>
     );

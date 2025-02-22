@@ -1,25 +1,33 @@
 import React, { useState } from "react";
-import { GroupedTransactions, Period } from "../../types.ts";
+import { GroupedTransactions, Period, TransactionType } from "../../types.ts";
 import ListYear from "./ListYear.tsx";
 
 import "../../styles/list.css";
 
 interface ListProps {
     groupedData: GroupedTransactions | null;
+    setTransactionData: React.Dispatch<React.SetStateAction<TransactionType[]>>;
 }
 
-function List({ groupedData }: ListProps): JSX.Element {
+function List({ groupedData, setTransactionData }: ListProps): JSX.Element {
     const [sortOption, setSortOption] = useState<Period>(Period.MONTH);
     const listData = groupedData?.transactions;
 
     return (
         <div className="list-view">
             <h2>List</h2>
-            <div className="sort-buttons">
-                <button onClick={() => setSortOption(Period.YEAR)}>Year</button>
-                <button onClick={() => setSortOption(Period.MONTH)}>Month</button>
-                <button onClick={() => setSortOption(Period.WEEK)}>Week</button>
-                <button onClick={() => setSortOption(Period.DAY)}>Day</button>
+            <div className="sort-dropdown">
+                <label htmlFor="sortOption">Categorize by: </label>
+                <select
+                    id="sortOption"
+                    value={sortOption}
+                    onChange={(e) => setSortOption(e.target.value as Period)}
+                >
+                    <option value={Period.YEAR}>Year</option>
+                    <option value={Period.MONTH}>Month</option>
+                    <option value={Period.WEEK}>Week</option>
+                    <option value={Period.DAY}>Day</option>
+                </select>
             </div>
             <div className="list-content">
                 {listData ? Object.entries(listData).map(([year, yearData]) => {
@@ -29,6 +37,7 @@ function List({ groupedData }: ListProps): JSX.Element {
                             yearData={yearData}
                             year={year}
                             sortOption={sortOption}
+                            setTransactionData={setTransactionData}
                         />
                     );
                 }) : <div>No Data...</div>}
