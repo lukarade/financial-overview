@@ -48,8 +48,8 @@ Start Date: 2024-30-11
 
 - [x] Empty months/weeks/days should be displayed as well. (2025-17-02)
 
-- [ ] Create a pie chart that displays the percentage of income and expenses for the current month.
-  - [ ] Income vs. Expense
+- [x] Create a pie chart that displays the percentage of income and expenses for the current time period. (2025-21-02)
+  - [x] Income vs. Expense  (2025-21-02)
 - [x] Add a button to navigate to the next month. (2025-17-02)
 - [x] Add a button to navigate to the previous month. (2025-17-02)
 - [ ] Add a button to navigate to the month of the current day.
@@ -76,9 +76,9 @@ Start Date: 2024-30-11
 - [ ] Add a button to navigate to the previous month.
 
 - [ ] Clicking on an item to show it (the day of that transaction) in the TransactionView
-- [ ] Editmode (possibility to edit many transactions very fast):
-  - [ ] Toggle Editmode on and off
-  - [ ] Make every entry editable (title, amount category, date)
+- [x] Editmode (possibility to edit many transactions very fast):  (2025-22-02)
+  - [x] Toggle Editmode on and off, by double cklicking an item (2025-22-02)
+  - [x] Make every entry editable (title, amount category, date)  (2025-22-02)
 ### Bugs
 - [x] Fix the bug that causes the list to generate month/ week/ day components for total income and expenses (which of course are not events). These are not displayed by a workaround with a guard clause in the coresponding component. This is also no longer needed with the new data structure
 
@@ -91,7 +91,7 @@ Start Date: 2024-30-11
 
 
 ## Financial Flow Component
-- [ ] Create a financial flow component that displays the peercentual capiital flow from all income to all expanses for the current year/month/week/day.
+- [ ] Create a financial flow component that displays the percentual capital flow from all income to all expanses for the current year/month/week/day.
 - [ ] Each category should be represented by a different color.
 - [ ] The categories should be sorted by the amount of money spent on them.
 - [ ] The categories should be clickable to display the events that belong to them.
@@ -115,3 +115,6 @@ Start Date: 2024-30-11
 -  [ ] The Add Transaction Form should be animated when it appears.
 -  [ ] The Add Transaction Form should be animated when it disappears.
 -  [ ] The Add Transaction Form should be animated when it is submitted (swift up and append to the list).
+  
+#### List View
+- [ ] Make the period infos scroll with the entrys. (Meaning when Year is selected the year should stick when scrolling)

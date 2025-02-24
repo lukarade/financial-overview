@@ -60,7 +60,7 @@ function ListTransaction({ transaction, setTransactionData }: ListTransactionPro
                     <input
                         type="text"
                         name="title"
-                        value={editedTransaction.title}
+                        value={editedTransaction.name}
                         onChange={handleChange}
                     />
                     <input
@@ -87,7 +87,7 @@ function ListTransaction({ transaction, setTransactionData }: ListTransactionPro
                 </>
             ) : (
                 <>
-                    <div className="transaction-title" onDoubleClick={handleEdit}>{transaction.title}</div>
+                    <div className="transaction-title" onDoubleClick={handleEdit}>{transaction.name}</div>
                     <div className="transaction-amount" style={styles} onDoubleClick={handleEdit}>{transaction.amount}</div>
                     <div className="transaction-category" onDoubleClick={handleEdit}>{transaction.category && (transaction.category)}</div>
                     <div className="transaction-date" onDoubleClick={handleEdit}>{transaction.date}</div>

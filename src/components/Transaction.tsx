@@ -61,7 +61,7 @@ function Transaction({ transaction, setTransactionData }: TransactionProps): JSX
                     <input
                         type="text"
                         name="title"
-                        value={editedTransaction.title}
+                        value={editedTransaction.name}
                         onChange={handleChange}
                     />
                     <input
@@ -87,7 +87,7 @@ function Transaction({ transaction, setTransactionData }: TransactionProps): JSX
                 </>
             ) : (
                 <>
-                    <h3>{transaction.title}</h3>
+                    <h3>{transaction.name}</h3>
                     <p>{transaction.amount}</p>
                     <p>{transaction.category}</p>
                     <div>

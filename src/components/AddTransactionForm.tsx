@@ -40,7 +40,7 @@ function AddTransactionForm({ transactionData, setTransactionData, currentSelect
 
         const transaction: TransactionType = {
             id: `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
-            title,
+            name: title,
             amount: Number(amount),
             date,
             category,

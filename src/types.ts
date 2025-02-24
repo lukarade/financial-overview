@@ -16,7 +16,7 @@ interface FinancialData {
 
 interface TransactionType {
     id: string;
-    title: string;
+    name: string;
     amount: number;
     date: string;
     category?: string;
@@ -89,6 +89,13 @@ type PieSliceData = {
 }
 
 
+type SortOptionsType = {
+    name: string;
+    type: string;
+    category: string;
+    date: string;
+}
+
 export {
     CalendarDayType,
     FinancialData,
@@ -104,5 +111,6 @@ export {
     MonthTransactions,
     YearTransactions,
     OverviewOptionsType,
-    PieSliceData
+    PieSliceData,
+    SortOptionsType,
 };

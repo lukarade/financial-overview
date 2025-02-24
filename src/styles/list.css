@@ -11,6 +11,11 @@
     overflow-y: scroll;
 }
 
+.filters {
+    display: flex;
+}
+
+
 .list-transaction {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
